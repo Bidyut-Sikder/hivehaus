@@ -1,10 +1,11 @@
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <>
-this is from bidyut
+      <Outlet />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
