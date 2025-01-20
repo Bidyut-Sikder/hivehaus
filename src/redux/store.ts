@@ -12,7 +12,6 @@ import {
 } from "redux-persist";
 
 import { baseApi } from "./api/baseApi";
-
 import { authReducer } from "./slices/authSlice";
 import storage from "redux-persist/lib/storage";
 
