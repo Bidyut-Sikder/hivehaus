@@ -4,7 +4,6 @@ import { useRef } from "react";
 import React from "react";
 import { projects } from "@/constants/constant";
 
-
 const HowItWorks = () => {
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
