@@ -6,6 +6,8 @@ import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import Rooms from "@/pages/Rooms";
+import BookRoom from "@/pages/user-pages/BookRoom";
+// import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -26,11 +28,20 @@ export const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: '/rooms',
-        element: <Rooms />
-    },
-
-
+        path: "/rooms",
+        element: <Rooms />,
+      },
+      {
+        path: "/rooms/:id",
+        element: (
+          // <PrivateRoute>
+            // <UserRoute>
+              <BookRoom />
+             
+            // </UserRoute>
+          // </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);

@@ -87,11 +87,11 @@ const Rooms = () => {
       </div>
 
       <div className="w-full mb-20">
-         <DataPagination
+        <DataPagination
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={handlePageChange}
-        /> 
+        />
       </div>
     </>
   );
