@@ -8,7 +8,7 @@ function App() {
   return (
     <Fragment>
       <Header />
-      <div className="min-h-[calc(100vh-150px)]">
+      <div className="">
         <Outlet />
       </div>
       <ScrollToTop />
