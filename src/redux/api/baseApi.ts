@@ -74,5 +74,6 @@ export const {
     useCreateRoomMutation,
     useUpdateRoomMutation,
     useDeleteRoomMutation,
-    useLazyGetRoomsQuery
+    useLazyGetRoomsQuery,
+    
 } = baseApi
