@@ -3,6 +3,7 @@ import FeaturedRoom from "@/components/home/FeaturedRoom"
 import HowItWorks from "@/components/home/HowItworks"
 import InfoTab from "@/components/home/InfoTab"
 import Services from "@/components/home/Services"
+import Testimonial from "@/components/home/Testimonials"
 
 
 function Home() {
@@ -13,6 +14,7 @@ function Home() {
   <Services />
   <HowItWorks />
   <InfoTab />
+  <Testimonial />
   </>
   )
 }
