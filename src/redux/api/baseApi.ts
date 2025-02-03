@@ -4,9 +4,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const baseApi = createApi({
     reducerPath: 'baseApi',
-    // baseQuery: fetchBaseQuery({ baseUrl: "http://127.0.0.1:5000/api/" }),
-    baseQuery: fetchBaseQuery({ baseUrl: "https://nexus-workspace.vercel.app/api/" }),
-    tagTypes: ['Slots', 'Bookings'],
+    baseQuery: fetchBaseQuery({ baseUrl: "http://127.0.0.1:5000/api/" }),
+    // baseQuery: fetchBaseQuery({ baseUrl: "https://nexus-workspace.vercel.app/api/" }),
+    tagTypes: ['Slots', 'Bookings','CheckData'],
     endpoints: (builder) => ({
         getRooms: builder.query({
             query: ({ search, sortBy }) => {

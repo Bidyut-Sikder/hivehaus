@@ -7,12 +7,14 @@ import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import Rooms from "@/pages/Rooms";
 import BookRoom from "@/pages/user-pages/BookRoom";
-// import PrivateRoute from "./PrivateRoute";
+import Signup from "@/pages/auth/Signup";
+import LoginPage from "@/pages/auth/Login";
+
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    errorElement: <ErrorPage />,
+
     element: <App />,
     children: [
       {
@@ -33,15 +35,18 @@ export const router = createBrowserRouter([
       },
       {
         path: "/rooms/:id",
-        element: (
-          // <PrivateRoute>
-            // <UserRoute>
-              <BookRoom />
-             
-            // </UserRoute>
-          // </PrivateRoute>
-        ),
+        element: <BookRoom />,
       },
+
     ],
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
   },
 ]);

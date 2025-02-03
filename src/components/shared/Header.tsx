@@ -15,7 +15,8 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [dropDownState, setDropDownState] = useState(false);
   const dropDownMenuRef = useRef<HTMLDivElement>(null);
-  const role = useAppSelector((state) => state.auth.role);
+  const role = useAppSelector((state) =>state.auth.role);
+
   const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -114,7 +115,7 @@ const Header = () => {
               <Link to="/login">Login</Link>
             </Button>
             <Button variant="secondary">
-              <Link to="/register">Register</Link>
+              <Link to="/signup">Register</Link>
             </Button>
           </>
         )}
