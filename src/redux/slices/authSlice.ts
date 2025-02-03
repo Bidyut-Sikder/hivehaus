@@ -6,7 +6,7 @@ interface AuthRole {
     email: string;
     phone: string;
     address: string;
-    role: string;
+    role: string 
     token: string
 }
 

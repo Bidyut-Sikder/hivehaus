@@ -15,7 +15,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [dropDownState, setDropDownState] = useState(false);
   const dropDownMenuRef = useRef<HTMLDivElement>(null);
-  const role = useAppSelector((state) =>state.auth.role);
+  const role = useAppSelector((state) => state.auth.role );
 
   const dispatch = useAppDispatch();
   const location = useLocation();
