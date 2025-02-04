@@ -50,6 +50,16 @@ const bookingApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getAdminBookingByBookingId: builder.query({
+      query: ({ token,id }) => {
+        return {
+          url: `/bookings/admin-paid-booking/${id}`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
   }),
 });
 
@@ -58,4 +68,5 @@ export const {
   useConfirmBookingMutation,
   useLazyGetBookingQuery,
   useLazyGetAdminBookingQuery,
+  useLazyGetAdminBookingByBookingIdQuery
 } = bookingApi;

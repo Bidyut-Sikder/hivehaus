@@ -14,6 +14,7 @@ import DataPagination from "../../components/shared/DataPagination";
 
 import { useAppSelector } from "../../redux/hooks";
 import { useLazyGetAdminBookingQuery } from "../../redux/api/bookingApi";
+import { Link } from "react-router-dom";
 
 interface Booking {
   _id: string;
@@ -65,7 +66,6 @@ const MyBookings = () => {
     return <RoomLoadingContainer />;
   }
 
-
   return (
     <div className="w-full">
       <Table className="max-w-screen-xl mx-auto mt-24">
@@ -77,7 +77,7 @@ const MyBookings = () => {
             <TableHead>Time</TableHead>
             <TableHead>Payment Status</TableHead>
             <TableHead className="w-[100px]">Status</TableHead>
-
+            <TableHead className="w-[100px]">Details</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -104,6 +104,12 @@ const MyBookings = () => {
               <TableCell className="text-right capitalize text-red-500">
                 {booking?.isConfirmed}
               </TableCell>
+              <TableCell className="text-right capitalize text-red-500">
+                <Link to={`/admin-dashboard/bookings/${booking?._id}`}>
+                  {" "}
+                  Details
+                </Link>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -123,4 +129,3 @@ const MyBookings = () => {
 };
 
 export default MyBookings;
-
