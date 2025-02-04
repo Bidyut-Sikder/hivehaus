@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Fragment, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { items as defaultItems } from "@/constants/constant";
+import { items as defaultItems} from "../../constants/constant";
+
+
 
 const ProductCarousel = ({ room }: any) => {
   const roomImages = room?.image?.length ? room.image : defaultItems;

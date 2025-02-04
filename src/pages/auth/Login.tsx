@@ -4,15 +4,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaEnvelope, FaLock } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
-import { loginSchema } from "@/lib/validation";
-import { useAppDispatch } from "@/redux/hooks";
-import { setRole, setToken, setUserData } from "@/redux/slices/authSlice";
-import { useLoginUserMutation } from "@/redux/api/authApi";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
 import { toast } from "sonner";
+import { useAppDispatch } from "../../redux/hooks";
+import { useLoginUserMutation } from "../../redux/api/authApi";
+import { loginSchema } from "../../lib/validation";
+import { setRole, setToken, setUserData } from "../../redux/slices/authSlice";
 
 function LoginPage() {
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const [loginUser] = useLoginUserMutation();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -43,8 +45,9 @@ function LoginPage() {
             token: res.token,
           })
         );
+        // console.log(location)
 
-        navigate("/");
+        navigate(location?.state?.from?.pathname || "/");
       } else {
         console.error("Login failed:", res.message);
       }

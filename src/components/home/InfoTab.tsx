@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useMediaQuery } from "@/hooks/custom-hooks";
-import { tabs } from "@/constants/constant";
+import { tabs } from "../../constants/constant";
+import { useMediaQuery } from "../../hooks/custom-hooks";
+
 
 
 function InfoTab() {

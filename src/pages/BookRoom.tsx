@@ -1,12 +1,17 @@
-import { Button } from "@/components/ui/button";
+
 // import ProductCarousel from "@/components/ui/ProductCarousel"
-import { Skeleton } from "@/components/skeleton/skeleton";
-import { useGetSingleRoomQuery } from "@/redux/api/baseApi";
-import { Link, useParams } from "react-router-dom";
-import ProductCarousel from "@/components/product/ProductCarousel";
+
+
+import {  useLocation, useNavigate, useParams } from "react-router-dom";
+
 
 import { useEffect, useState } from "react";
-import { useLazyCheckBookinAvilabilityQuery } from "@/redux/api/bookingApi";
+import { useAppSelector } from "../redux/hooks";
+import { useGetSingleRoomQuery } from "../redux/api/baseApi";
+import { useLazyCheckBookinAvilabilityQuery } from "../redux/api/bookingApi";
+import { Skeleton } from "../components/skeleton/skeleton";
+import ProductCarousel from "../components/product/ProductCarousel";
+import { Button } from "../components/ui/button";
 
 function formatDateToYYYYMMDD(date: any) {
   const year = date.getFullYear();
@@ -30,8 +35,10 @@ const timeSlots = [
 ];
 
 const BookRoom = () => {
+  const location=useLocation()
   const { id } = useParams();
-
+  const role = useAppSelector((state) => state.auth.role);
+  const navigate = useNavigate();
   const { data: room, isLoading } = useGetSingleRoomQuery(id);
   const [selectedDate, setSelectedDate] = useState<string>(formattedDate);
 
@@ -41,13 +48,32 @@ const BookRoom = () => {
   const [startTime, setStartTime] = useState<string | null>("09:00 AM");
   const [endTime, setEndTime] = useState<string | null>("05:00 PM");
 
-  const [triggerCheckBooking, {  isError,  }] =
+  const [triggerCheckBooking, { isError }] =
     useLazyCheckBookinAvilabilityQuery();
 
   useEffect(() => {
     triggerCheckBooking({ roomId: id, startTime, endTime, date: selectedDate });
-
   }, [id, startTime, endTime, selectedDate, triggerCheckBooking]);
+
+  const handleBooking = () => {
+    localStorage.setItem(
+      "bookingDetail",
+      JSON.stringify({
+        roomId: id,
+        startTime,
+        endTime,
+        date: selectedDate,
+        pricePerSlot: room?.pricePerSlot,
+      })
+    );
+
+    navigate("/booking-details");
+  };
+
+  const handleLogin = () => {
+    // console.log(location)
+    navigate("/login", { state: { from: location } });
+  };
 
   // console.log(data);
 
@@ -153,14 +179,14 @@ const BookRoom = () => {
 
             {/* Display Selected Time Range */}
             {isError ? (
-              <p className="mt-4 text-lg">available</p>
+              <p className="mt-4 text-lg">Available</p>
             ) : (
-              <p className="mt-4 text-lg">taken</p>
+              <p className="mt-4 text-lg">Taken</p>
             )}
           </div>
 
           <p className="mt-4 max-w-3xl tracking-wide text-gray-500">
-            {room?.amenities.map((amenity, index) => (
+            {room?.amenities.map((amenity:string, index:number) => (
               <span key={index} className="inline-block mr-1 capitalize">
                 {amenity},
               </span>
@@ -168,13 +194,20 @@ const BookRoom = () => {
           </p>
 
           <p className="text-2xl font-bold text-slate-800/85 mt-4">
-            ${room?.pricePerSlot}
+            ${room?.pricePerSlot} <span className="text-sm">hour</span>
           </p>
-          <Link to={`/slotBooking/${id}`}>
-            <Button className="w-9/12 mt-6 flex items-center justify-center">
-              Book Now
-            </Button>
-          </Link>
+
+          {/* <Link
+            to={role === "user" ? `/booking-details` : `/login`}
+            // to={`/slotBooking/${id}`}
+          > */}
+          <Button
+            onClick={role === "user" ? handleBooking : handleLogin}
+            className="w-9/12 mt-6 flex items-center justify-center"
+          >
+            CheckOut
+          </Button>
+          {/* </Link> */}
         </div>
       </div>
     </>

@@ -11,9 +11,11 @@ import {
     IconArrowNarrowRight,
     IconX,
 } from "@tabler/icons-react";
-import { cn } from "@/lib/utils";
+
 import { AnimatePresence, motion } from "framer-motion";
-import { useOutsideClick } from "@/hooks/custom-hooks";
+import { cn } from "../../lib/utils";
+import { useOutsideClick } from "../../hooks/custom-hooks";
+
 
 
 interface CarouselProps {

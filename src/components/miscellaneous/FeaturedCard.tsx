@@ -1,8 +1,10 @@
-import { useAppSelector } from "@/redux/hooks";
-import { TRoom } from "@/types/global";
+// import { useAppSelector } from "@/redux/hooks";
+// import { TRoom } from "@/types/global";
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { useAppSelector } from "../../redux/hooks";
+import { TRoom } from "../../types/global";
 
 interface FeatureCardProps {
     feature: TRoom;

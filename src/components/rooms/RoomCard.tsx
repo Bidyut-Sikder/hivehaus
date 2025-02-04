@@ -1,15 +1,16 @@
-import { useAppSelector } from "@/redux/hooks";
-import { TRoom } from "@/types/global";
+
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { Link } from "react-router-dom";
+import { TRoom } from "../../types/global";
+import { useAppSelector } from "../../redux/hooks";
 
 interface RoomCardProps {
     room: TRoom;
 }
 
 const RoomCard = ({ room }: RoomCardProps) => {
-    const role = useAppSelector((state) => state.auth.role)
+    const role = useAppSelector((state:any) => state.auth.role)
 
     const imageUrl = room?.image[0] || "https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80";
 
@@ -17,7 +18,7 @@ const RoomCard = ({ room }: RoomCardProps) => {
         <div className="max-[350px] mx-auto space-y-4 rounded bg-gray-50/30 p-6 md:w-[350px] dark:border-zinc-700 dark:bg-zinc-900">
             <div className="relative rounded-2xl group overflow-hidden">
                 <LazyLoadImage
-                    width={350}
+                    width={350} 
                     height={190}
                     className="h-44 w-full object-cover"
                     src={imageUrl}

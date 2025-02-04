@@ -14,11 +14,12 @@ import {
 } from "react-icons/fa";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import { signupSchema } from "@/lib/validation";
-import { useSignUpUserMutation } from "@/redux/api/authApi";
-import { useAppDispatch } from "@/redux/hooks";
-import { setRole, setToken, setUserData } from "@/redux/slices/authSlice";
+
 import { toast } from "sonner";
+import { useAppDispatch } from "../../redux/hooks";
+import { useSignUpUserMutation } from "../../redux/api/authApi";
+import { signupSchema } from "../../lib/validation";
+import { setRole, setToken, setUserData } from "../../redux/slices/authSlice";
 
 function SignupPage() {
   const navigate = useNavigate();

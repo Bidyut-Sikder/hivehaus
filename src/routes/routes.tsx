@@ -1,20 +1,19 @@
 import { createBrowserRouter } from "react-router-dom";
+import App from "../App";
+import Home from "../pages/Home";
+import About from "../pages/About";
+import Contact from "../pages/Contact";
+import Rooms from "../pages/Rooms";
+import BookRoom from "../pages/BookRoom";
 
-import ErrorPage from "@/pages/ErrorPage";
-import App from "@/App";
-import Home from "@/pages/Home";
-import About from "@/pages/About";
-import Contact from "@/pages/Contact";
-import Rooms from "@/pages/Rooms";
-import BookRoom from "@/pages/user-pages/BookRoom";
-import Signup from "@/pages/auth/Signup";
-import LoginPage from "@/pages/auth/Login";
-
+import ErrorPage from "../pages/ErrorPage";
+import SignupPage from "../pages/auth/Signup";
+import LoginPage from "../pages/auth/Login";
+import CheckOut from "../pages/CheckOut";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-
     element: <App />,
     children: [
       {
@@ -23,7 +22,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/aboutUS",
-        element: <About />,
+        element: <About/>,
       },
       {
         path: "/contact",
@@ -37,16 +36,19 @@ export const router = createBrowserRouter([
         path: "/rooms/:id",
         element: <BookRoom />,
       },
-
+      {
+        path: "/booking-details",
+        element: <CheckOut />,
+      },
     ],
     errorElement: <ErrorPage />,
   },
   {
     path: "/signup",
-    element: <Signup />,
+    element: <SignupPage />,
   },
   {
     path: "/login",
-    element: <LoginPage />,
+    element: <LoginPage/>,
   },
 ]);

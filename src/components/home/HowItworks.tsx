@@ -2,7 +2,8 @@ import { ReactLenis } from "lenis/react";
 import { useTransform, motion, useScroll, MotionValue } from "framer-motion";
 import { useRef } from "react";
 import React from "react";
-import { projects } from "@/constants/constant";
+import { projects } from "../../constants/constant";
+
 
 const HowItWorks = () => {
   const container = useRef(null);

@@ -1,6 +1,8 @@
+import { features } from "../../constants/constant";
+import { cn } from "../../lib/utils";
 
-import { features } from "@/constants/constant";
-import { cn } from "@/lib/utils";
+
+
 
 const Services = () => {
 

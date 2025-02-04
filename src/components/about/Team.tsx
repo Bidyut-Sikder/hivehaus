@@ -1,4 +1,5 @@
-import TeamCircle from "@/svgs/TeamCircle";
+import TeamCircle from "../../svgs/TeamCircle";
+
 
 
 const Team = () => {

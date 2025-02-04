@@ -1,19 +1,16 @@
-import DataPagination from "@/components/shared/DataPagination";
-import RoomLoading from "@/components/loading/RoomLoading";
-import RoomCard from "@/components/rooms/RoomCard";
+
 // import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useLazyGetRoomsQuery } from "@/redux/api/baseApi";
+
+
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useLazyGetRoomsQuery } from "../redux/api/baseApi";
+import RoomLoadingContainer from "../components/loading/RoomLoading";
+import { Input } from "../components/ui/input";
+import { Button } from "../components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
+import { SelectGroup } from "@radix-ui/react-select";
+import RoomCard from "../components/rooms/RoomCard";
+import DataPagination from "../components/shared/DataPagination";
 
 const Rooms = () => {
   const [search, setSearch] = useState("");
@@ -47,7 +44,7 @@ const Rooms = () => {
   };
 
   if (isLoading) {
-    return <RoomLoading />;
+    return <RoomLoadingContainer />;
   }
 
   return (
@@ -81,7 +78,7 @@ const Rooms = () => {
         </div>
       </div>
       <div className="max-w-screen-2xl mx-auto grid gap-y-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 pt-10 pb-4 justify-items-center">
-        {currentRoomData?.map((data) => (
+        {currentRoomData?.map((data:any) => (
           <RoomCard room={data} key={data._id} />
         ))}
       </div>

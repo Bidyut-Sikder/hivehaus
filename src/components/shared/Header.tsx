@@ -1,15 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "/images/logo-3.svg";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import {
-  clearRole,
-  removeToken,
-  removeUserData,
-} from "@/redux/slices/authSlice";
-import { persistor } from "@/redux/store";
+
 import { Button } from "../ui/button";
 import ProfileAvatar from "../miscellaneous/ProfileAvatar";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { clearRole, removeToken, removeUserData } from "../../redux/slices/authSlice";
+import { persistor } from "../../redux/store";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
