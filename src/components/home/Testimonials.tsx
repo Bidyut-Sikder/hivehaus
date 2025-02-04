@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useCallback, useRef } from "react";
+// @ts-ignore
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import LeftArrow from "../../svgs/LeftArrow";
@@ -59,7 +60,7 @@ const Testimonial = () => {
   return (
     <section className="pb-20 pt-20 dark:bg-dark lg:pb-[120px] lg:pt-[120px]">
       <div className="container mx-auto">
-         <Swiper slidesPerView={1} ref={sliderRef}>
+        <Swiper slidesPerView={1} ref={sliderRef}>
           {testimonials.map((testimonial, index) => (
             <SwiperSlide key={index}>
               <SingleTestimonial
@@ -84,7 +85,7 @@ const Testimonial = () => {
               </button>
             </div>
           </div>
-        </Swiper> 
+        </Swiper>
       </div>
     </section>
   );

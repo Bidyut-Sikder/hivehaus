@@ -10,11 +10,12 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { RootState } from "../../redux/store";
 
 const ProfileAvatar = () => {
-  const decodedRole = useSelector((state: RootState) => state.auth.role);
+  const role = useSelector((state: RootState) => state.auth.role);
 
   return (
     <>
@@ -29,10 +30,10 @@ const ProfileAvatar = () => {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            {decodedRole == "user" ? (
+            {role == "user" ? (
               <>
                 {/* User Dashboard */}
-                <Link to="/userDashboard">
+                <Link to="/user-dashboard">
                   <DropdownMenuItem className="cursor-pointer">
                     Dashboard
                   </DropdownMenuItem>
@@ -40,7 +41,7 @@ const ProfileAvatar = () => {
               </>
             ) : (
               // Admin Dashboard
-              <Link to="/dashboard">
+              <Link to="/admin-dashboard">
                 <DropdownMenuItem className="cursor-pointer">
                   Dashboard
                 </DropdownMenuItem>

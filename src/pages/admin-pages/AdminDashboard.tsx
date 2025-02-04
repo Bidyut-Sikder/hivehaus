@@ -1,20 +1,27 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { BookOpenCheck,  User } from "lucide-react";
+import { BookOpenCheck, User } from "lucide-react";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { persistor } from "../../redux/store";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { clearRole, removeToken, removeUserData } from "../../redux/slices/authSlice";
+import {
+  clearRole,
+  removeToken,
+  removeUserData,
+} from "../../redux/slices/authSlice";
 import { cn } from "../../lib/utils";
-import { Sidebar, SidebarBody, SidebarLink } from "../../components/ui/user-sidebar";
+import {
+  Sidebar,
+  SidebarBody,
+  SidebarLink,
+} from "../../components/ui/user-sidebar";
 
 // import Chart from "@/components/UserCharts/Chart";
 
-
-export default  function UserDashboard() {
+export default function UserDashboard() {
   const [open, setOpen] = useState(false);
-  const name = useAppSelector((state) => state.auth.name)
+  const name = useAppSelector((state) => state.auth.name);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,23 +32,37 @@ export default  function UserDashboard() {
     dispatch(removeUserData());
     persistor.purge();
 
-    navigate('/')
+    navigate("/");
   };
 
   const links = [
     {
       label: "My Bookings",
-      href: "/user-dashboard/bookings",
+      href: "/admin-dashboard/bookings",
       icon: (
         <BookOpenCheck className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-      )
+      ),
     },
+    {
+      label: "My Rooms",
+      href: "/admin-dashboard/rooms",
+      icon: (
+        <BookOpenCheck className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+      ),
+    },
+    {
+        label: "Create Room",
+        href: "/admin-dashboard/add-room",
+        icon: (
+          <BookOpenCheck className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        ),
+      },
     {
       label: "Profile",
       href: "/user-dashboard/profile",
       icon: (
         <User className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-      )
+      ),
     },
     {
       label: "Logout",
@@ -52,9 +73,6 @@ export default  function UserDashboard() {
       action: handleLogout,
     },
   ];
-
-
-
 
   return (
     <div
@@ -69,10 +87,7 @@ export default  function UserDashboard() {
             {open ? <Logo /> : <LogoIcon />}
             <div className="mt-5 flex flex-col gap-2">
               {links.map((link, idx) => (
-                <SidebarLink
-                  key={idx}
-                  link={link}
-                />
+                <SidebarLink key={idx} link={link} />
               ))}
             </div>
           </div>
@@ -94,15 +109,17 @@ export default  function UserDashboard() {
             />
           </div>
         </SidebarBody>
-      </Sidebar> 
+      </Sidebar>
       <div className="flex-1 p-4">
-        {location.pathname === '/user-dashboard' ? (
+        {location.pathname === "/user-dashboard" ? (
           <div className="overflow-auto">
             {/* <Chart /> */}
-           <h1>When ocation.pathname === '/user-dashboard' then show Chart </h1>
+            
+            <h1>
+              When ocation.pathname === '/admin-dashboard' then show Chart{" "}
+            </h1>
           </div>
         ) : (
-      
           <Outlet />
         )}
       </div>
@@ -113,7 +130,7 @@ export default  function UserDashboard() {
 export const Logo = () => {
   return (
     <Link
-      to="/user-dashboard"
+      to="/admin-dashboard"
       className="font-normal flex space-x-2 items-center text-sm text-slate-700 py-1 relative z-20"
     >
       <div className="h-5 w-6 bg-slate-700 dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
@@ -130,11 +147,10 @@ export const Logo = () => {
 export const LogoIcon = () => {
   return (
     <Link
-      to="/userDashboard"
+      to="/admin-dashboard"
       className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
     >
       <div className="h-5 w-6 bg-black dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
     </Link>
   );
 };
-

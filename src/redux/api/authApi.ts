@@ -1,5 +1,6 @@
 
-import { LoginResponse } from "@/types/auth.type";
+
+import { LoginResponse } from "../../types/auth.type";
 import { baseApi } from "./baseApi";
 
 

@@ -1,6 +1,7 @@
 
-import { TRoomsResponse, TSingleRoomResponse } from '@/types/global';
+
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { TRoomsResponse, TSingleRoomResponse } from '../../types/global';
 
 export const baseApi = createApi({
     reducerPath: 'baseApi',

@@ -10,6 +10,14 @@ import ErrorPage from "../pages/ErrorPage";
 import SignupPage from "../pages/auth/Signup";
 import LoginPage from "../pages/auth/Login";
 import CheckOut from "../pages/CheckOut";
+import UserDashboard from "../pages/user-pages/UserDashboard";
+import UserBookings from "../pages/user-pages/UserBookings";
+import UserProfile from "../pages/user-pages/UserProfile";
+import UserRoute from "./UserRoute";
+import AdminDashboard from "../pages/admin-pages/AdminDashboard";
+import AdminRooms from "../pages/admin-pages/AdminRooms";
+import AdminBooking from "../pages/admin-pages/AdminBooking";
+import CreateRoom from "../pages/admin-pages/CreateRooms";
 
 export const router = createBrowserRouter([
   {
@@ -22,7 +30,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/aboutUS",
-        element: <About/>,
+        element: <About />,
       },
       {
         path: "/contact",
@@ -40,6 +48,42 @@ export const router = createBrowserRouter([
         path: "/booking-details",
         element: <CheckOut />,
       },
+      {
+        path: "/user-dashboard",
+        element: (
+          <UserRoute>
+            <UserDashboard />
+          </UserRoute>
+        ),
+        children: [
+          {
+            path: "/user-dashboard/bookings",
+            element: <UserBookings />,
+          },
+          {
+            path: "/user-dashboard/profile",
+            element: <UserProfile />,
+          },
+        ],
+      },
+      {
+        path: "/admin-dashboard",
+        element: <AdminDashboard />,
+        children: [
+          {
+            path: "/admin-dashboard/rooms",
+            element: <AdminRooms />,
+          },
+          {
+            path: "/admin-dashboard/bookings",
+            element: <AdminBooking />,
+          },
+          {
+            path: "/admin-dashboard/add-room",
+            element: <CreateRoom />,
+          },
+        ],
+      },
     ],
     errorElement: <ErrorPage />,
   },
@@ -49,6 +93,10 @@ export const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <LoginPage/>,
+    element: <LoginPage />,
+  },
+  {
+    path: "/success",
+    element: <h1>payment success</h1>,
   },
 ]);

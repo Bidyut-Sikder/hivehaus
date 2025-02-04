@@ -15,22 +15,47 @@ const bookingApi = baseApi.injectEndpoints({
     //confirm booking payment
     confirmBooking: builder.mutation({
       query: ({ booking, token }) => {
-     console.log(booking,token)
+        console.log(booking, token);
         return {
           url: "/payments/init",
           method: "POST",
           body: booking,
           headers: {
             Authorization: `Bearer ${token}`,
-          
           },
         };
       },
 
       // refetchOnMountOrArgChange: true
     }),
+    //user bookings
+    getBooking: builder.query({
+      query: ({ token }) => {
+        return {
+          url: "/bookings/user-paid",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
+    //admin bookings
+    getAdminBooking: builder.query({
+      query: ({ token }) => {
+        return {
+          url: "/bookings/admin-paid",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const { useLazyCheckBookinAvilabilityQuery, useConfirmBookingMutation } =
-  bookingApi;
+export const {
+  useLazyCheckBookinAvilabilityQuery,
+  useConfirmBookingMutation,
+  useLazyGetBookingQuery,
+  useLazyGetAdminBookingQuery,
+} = bookingApi;
