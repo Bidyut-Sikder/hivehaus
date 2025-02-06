@@ -26,3 +26,12 @@
 .bg-about{
   background-image: url('https://nexus-workspace-frontend.vercel.app/images/about.jpg');
 }
+
+
+/* .parent-container {
+  height: auto;
+  min-height: 100vh;
+  overflow-y: auto;
+  position: relative;
+  display: flex;
+} */

@@ -67,7 +67,7 @@ const MyBookings = () => {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full mb-1">
       <Table className="max-w-screen-xl mx-auto mt-24">
         <TableHeader>
           <TableRow>
@@ -101,13 +101,15 @@ const MyBookings = () => {
               <TableCell className="capitalize text-green-600">
                 {booking?.paymentStatus}
               </TableCell>
-              <TableCell className="text-right capitalize text-red-500">
+              <TableCell className="text-right capitalize text-green-500">
                 {booking?.isConfirmed}
               </TableCell>
-              <TableCell className="text-right capitalize text-red-500">
+              <TableCell className="text-right capitalize text-gray-500">
                 <Link to={`/admin-dashboard/bookings/${booking?._id}`}>
                   {" "}
-                  Details
+                  <span className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                    Details
+                  </span>
                 </Link>
               </TableCell>
             </TableRow>

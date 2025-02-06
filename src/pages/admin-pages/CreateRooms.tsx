@@ -1,4 +1,4 @@
-
+import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 interface RoomFormInput {
@@ -7,161 +7,205 @@ interface RoomFormInput {
   floorNo: number;
   capacity: number;
   pricePerSlot: number;
-  image: string;
+  image: string[];
   amenities: string[];
 }
 
-const CreateRoom = () => {
+const RoomForm: React.FC = () => {
   const {
     register,
     handleSubmit,
-    reset,
+
     formState: { errors },
   } = useForm<RoomFormInput>();
 
   const onSubmit: SubmitHandler<RoomFormInput> = (data) => {
-    console.log("Form Data:", data);
-    reset();
+    const formData = new FormData();
+
+    formData.append("name", data.name);
+    formData.append("roomNo", data.roomNo.toString());
+    formData.append("capacity", data.capacity.toString());
+    formData.append("pricePerSlot", data.pricePerSlot.toString());
+    formData.append("floorNo", data.floorNo.toString());
+
+    data.amenities.forEach((amenitie, index) => {
+      formData.append(`amenities[${index}]`, amenitie);
+    });
+
+    Array.from(data.image).forEach((imageFile) => {
+      formData.append(`image`, imageFile);
+    });
+
+    // if (formDataJson.imageUrls) {
+    //   formDataJson.imageUrls.forEach((imageUrl, index) => {
+    //     formData.append(`imageUrls[${index}]`, imageUrl);
+    //   });
+    // }
+
+    console.log(data)
+
   };
 
   return (
-    <section className="min-h-screen bg-gray-50 py-10">
-      <div className="max-w-3xl mx-auto bg-white p-8 shadow-lg rounded-lg">
-        <h2 className="text-2xl font-semibold text-gray-800 text-center mb-6">
-          Room Details Form
-        </h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          {/* Room Name */}
-          <div>
-            <label className="block text-gray-600 mb-1">Room Name:</label>
-            <input
-              type="text"
-              {...register("name", { required: "Room name is required" })}
-              placeholder="Deluxe Suite"
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            {errors.name && (
-              <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-            )}
-          </div>
+    <div className="max-w-xl mx-auto mt-10">
+      <h1 className="text-2xl font-bold mb-5">Room Registration Form</h1>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* Room Name */}
+        <div>
+          <label className="block text-sm font-medium">Room Name:</label>
+          <input
+            className="w-full p-2 border rounded"
+            {...register("name", { required: "Room name is required" })}
+          />
+          {errors.name && (
+            <p className="text-red-500 text-sm">{errors.name.message}</p>
+          )}
+        </div>
 
-          {/* Room Number */}
-          <div>
-            <label className="block text-gray-600 mb-1">Room No:</label>
-            <input
-              type="number"
-              {...register("roomNo", { required: "Room number is required" })}
-              placeholder="101"
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            {errors.roomNo && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.roomNo.message}
-              </p>
-            )}
-          </div>
+        {/* Room Number */}
+        <div>
+          <label className="block text-sm font-medium">Room Number:</label>
+          <input
+            type="number"
+            className="w-full p-2 border rounded"
+            {...register("roomNo", { required: "Room number is required" })}
+          />
+          {errors.roomNo && (
+            <p className="text-red-500 text-sm">{errors.roomNo.message}</p>
+          )}
+        </div>
 
-          {/* Floor Number */}
-          <div>
-            <label className="block text-gray-600 mb-1">Floor No:</label>
-            <input
-              type="number"
-              {...register("floorNo", { required: "Floor number is required" })}
-              placeholder="1"
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            {errors.floorNo && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.floorNo.message}
-              </p>
-            )}
-          </div>
+        {/* Floor Number */}
+        <div>
+          <label className="block text-sm font-medium">Floor Number:</label>
+          <input
+            type="number"
+            className="w-full p-2 border rounded"
+            {...register("floorNo", { required: "Floor number is required" })}
+          />
+          {errors.floorNo && (
+            <p className="text-red-500 text-sm">{errors.floorNo.message}</p>
+          )}
+        </div>
 
-          {/* Capacity */}
-          <div>
-            <label className="block text-gray-600 mb-1">Capacity:</label>
-            <input
-              type="number"
-              {...register("capacity", { required: "Capacity is required" })}
-              placeholder="4"
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            {errors.capacity && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.capacity.message}
-              </p>
-            )}
-          </div>
+        {/* Capacity */}
+        <div>
+          <label className="block text-sm font-medium">Capacity:</label>
+          <input
+            type="number"
+            className="w-full p-2 border rounded"
+            {...register("capacity", { required: "Capacity is required" })}
+          />
+          {errors.capacity && (
+            <p className="text-red-500 text-sm">{errors.capacity.message}</p>
+          )}
+        </div>
 
-          {/* Price per Slot */}
-          <div>
-            <label className="block text-gray-600 mb-1">Price per Slot:</label>
-            <input
-              type="number"
-              {...register("pricePerSlot", {
-                required: "Price per slot is required",
-              })}
-              placeholder="150"
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            {errors.pricePerSlot && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.pricePerSlot.message}
-              </p>
-            )}
-          </div>
+        {/* Price Per Slot */}
+        <div>
+          <label className="block text-sm font-medium">Price Per Slot:</label>
+          <input
+            type="number"
+            step="0.01"
+            className="w-full p-2 border rounded"
+            {...register("pricePerSlot", {
+              required: "Price per slot is required",
+            })}
+          />
+          {errors.pricePerSlot && (
+            <p className="text-red-500 text-sm">
+              {errors.pricePerSlot.message}
+            </p>
+          )}
+        </div>
 
-          {/* Image */}
-          <div>
-            <label className="block text-gray-600 mb-1">Image URL:</label>
-            <input
-              type="url"
-              {...register("image", { required: "Image URL is required" })}
-              placeholder="https://example.com/image.jpg"
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            {errors.image && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.image.message}
-              </p>
-            )}
-          </div>
+        {/* Image Upload */}
+        <div>
+          <label className="block text-sm font-medium">Upload Images:</label>
+          <input
+            type="file"
+            multiple
+            className="w-full p-2 border rounded"
+            {...register("image", {
+              validate: (images) => {
+                let totalLength = images.length; //+ (existingImageUrls?.length || 0);
 
-          {/* Amenities */}
-          <div>
-            <label className="block text-gray-600 mb-1">Amenities:</label>
-            <select
-              multiple
-              {...register("amenities", {
-                required: "Select at least one amenity",
-              })}
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-              <option value="WiFi">WiFi</option>
-              <option value="Air Conditioning">Air Conditioning</option>
-              <option value="Smart TV">Smart TV</option>
-              <option value="Mini Bar">Mini Bar</option>
-            </select>
-            {errors.amenities && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.amenities.message}
-              </p>
-            )}
-          </div>
+                if (totalLength === 0) {
+                  return "Please select at least one image";
+                }
+                if (totalLength > 6) {
+                  return "You can only upload up to 6 images";
+                }
+                return true;
+              },
+            })}
+          />
+          {errors.image && (
+            <p className="text-red-500 text-sm">{errors.image.message}</p>
+          )}
+        </div>
 
-          {/* Submit Button */}
-          <div className="flex justify-end">
-            <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg focus:ring-2 focus:ring-blue-400"
-            >
-              Submit
-            </button>
+        {/* Amenities */}
+        <div>
+          <label className="block text-sm font-medium">Select Amenities:</label>
+          <div className="grid grid-cols-2 gap-2">
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                value="WiFi"
+                {...register("amenities", {
+                  required: "Please select at least one amenity",
+                })}
+              />
+              <span className="ml-2">WiFi</span>
+            </label>
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                value="Projector"
+                {...register("amenities")}
+              />
+              <span className="ml-2">Projector</span>
+            </label>
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                value="Whiteboard"
+                {...register("amenities")}
+              />
+              <span className="ml-2">Whiteboard</span>
+            </label>
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                value="Air Conditioning"
+                {...register("amenities")}
+              />
+              <span className="ml-2">Air Conditioning</span>
+            </label>
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                value="Parking"
+                {...register("amenities")}
+              />
+              <span className="ml-2">Parking</span>
+            </label>
           </div>
-        </form>
-      </div>
-    </section>
+          {errors.amenities && (
+            <p className="text-red-500 text-sm">{errors.amenities.message}</p>
+          )}
+        </div>
+
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
   );
 };
 
-export default CreateRoom;
+export default RoomForm;
