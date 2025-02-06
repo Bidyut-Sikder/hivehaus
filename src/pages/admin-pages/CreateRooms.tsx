@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useCreateRoomMutation } from "../../redux/api/baseApi";
+import { useSelector } from "react-redux";
 
 interface RoomFormInput {
   name: string;
@@ -18,7 +20,10 @@ const RoomForm: React.FC = () => {
 
     formState: { errors },
   } = useForm<RoomFormInput>();
+  const [createRoom, { isLoading }] = useCreateRoomMutation();
 
+  //@ts-ignore
+  const token = useSelector((state) => state.auth.token);
   const onSubmit: SubmitHandler<RoomFormInput> = (data) => {
     const formData = new FormData();
 
@@ -36,16 +41,15 @@ const RoomForm: React.FC = () => {
       formData.append(`image`, imageFile);
     });
 
+    createRoom({ formData, token });
+
     // if (formDataJson.imageUrls) {
     //   formDataJson.imageUrls.forEach((imageUrl, index) => {
     //     formData.append(`imageUrls[${index}]`, imageUrl);
     //   });
     // }
-
-    console.log(data)
-
   };
-
+  console.log(isLoading);
   return (
     <div className="max-w-xl mx-auto mt-10">
       <h1 className="text-2xl font-bold mb-5">Room Registration Form</h1>
@@ -124,6 +128,7 @@ const RoomForm: React.FC = () => {
           <label className="block text-sm font-medium">Upload Images:</label>
           <input
             type="file"
+            accept="image/*"
             multiple
             className="w-full p-2 border rounded"
             {...register("image", {

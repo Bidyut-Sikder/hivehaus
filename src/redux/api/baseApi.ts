@@ -29,12 +29,12 @@ export const baseApi = createApi({
             providesTags: ['Slots']
         }),
         createRoom: builder.mutation({
-            query: ({ roomData, token }) => {
-                console.log(roomData);
+            query: ({ formData, token }) => {
+            
                 return {
                     url: '/rooms',
                     method: 'POST',
-                    body: roomData,
+                    body: formData,
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -43,7 +43,7 @@ export const baseApi = createApi({
         }),
         updateRoom: builder.mutation({
             query: ({ updatedData, token, roomId }) => {
-                console.log(updatedData);
+
                 return {
                     url: `/rooms/${roomId}`,
                     method: 'PATCH',
