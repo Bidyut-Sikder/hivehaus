@@ -111,9 +111,7 @@ const BookRoom = () => {
             {room?.name}
           </h2>
           <p className="mt-4 max-w-3xl tracking-wide text-gray-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, in
-            labore deserunt eaque at dolorem a praesentium ipsam molestiae iusto
-            obcaecati id ad assumenda repellendus.
+           {room?.description}
           </p>
           <p className="text-md text-gray-600 font-semibold mt-4">
             Floor: {room?.floorNo}
