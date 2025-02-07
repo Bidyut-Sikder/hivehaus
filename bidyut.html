@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burning Candle</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #1a1a1a;
+    }
+
+    .candle {
+      position: relative;
+      width: 60px;
+      height: 220px;
+      background: linear-gradient(to right, #8B4513, #A0522D, #8B4513);
+      border-radius: 5px;
+      box-shadow: inset 0 -10px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .candle::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      background: #FFD700;
+      border-radius: 50%;
+      box-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700, 0 0 60px #FFD700;
+    }
+
+    .flame {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 50px;
+      background: #FFA500;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      animation: flicker 1.5s infinite alternate;
+    }
+
+    .flame::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      background: #FF4500;
+      border-radius: 50%;
+      opacity: 0.7;
+    }
+
+    .flame::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      background: #FFD700;
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+
+    @keyframes flicker {
+      0% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 10px #FFA500, 0 0 20px #FFA500, 0 0 30px #FFA500;
+      }
+      50% {
+        transform: translateX(-50%) scale(1.1);
+        box-shadow: 0 0 15px #FFA500, 0 0 30px #FFA500, 0 0 45px #FFA500;
+      }
+      100% {
+        transform: translateX(-50%) scale(0.9);
+        box-shadow: 0 0 5px #FFA500, 0 0 10px #FFA500, 0 0 15px #FFA500;
+      }
+    }
+
+    /* .wax-drip {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 20px;
+      background: #8B4513;
+      border-radius: 50% 50% 0 0;
+      animation: drip 5s infinite;
+    } */
+
+    @keyframes drip {
+      0% {
+        height: 0;
+      }
+      50% {
+        height: 20px;
+      }
+      100% {
+        height: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="candle">
+    <div class="flame"></div>
+    <div class="wax-drip"></div>
+  </div>
+</body>
+</html>

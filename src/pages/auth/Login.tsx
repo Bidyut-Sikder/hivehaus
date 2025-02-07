@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { FaEnvelope, FaLock } from "react-icons/fa";
+import { FaEnvelope,FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { toast } from "sonner";
@@ -18,6 +18,10 @@ function LoginPage() {
   const [loginUser] = useLoginUserMutation();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const {
     register,
     handleSubmit,
@@ -120,13 +124,21 @@ function LoginPage() {
           </label>
           <div className="relative flex items-center">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               className="flex h-10 rounded-md border bg-white focus:border-blue-600 w-full text-sm text-gray-800 border-b border-gray-300 px-2 py-3 outline-none"
               placeholder="Enter password"
               {...register("password")}
             />
-            <FaLock className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+             className="absolute cursor-pointer right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+
+            {/* <FaEyeSlash className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" /> */}
           </div>
           {errors.password?.message && (
             <p className="text-red-500 text-sm mt-1">
@@ -146,6 +158,7 @@ function LoginPage() {
             <label className="ml-3 block text-sm text-gray-800">
               Remember me
             </label>
+            {/* <button className="ml-3 block text-sm text-gray-800" type="button" onClick={handleShow}>show</button> */}
           </div>
           <div>
             <a className="text-blue-600 font-semibold text-sm hover:underline">
@@ -223,67 +236,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-
-{
-  /* <div className="p-10 flex flex-col justify-center">
-<h2 className="text-3xl font-bold text-gray-700 mb-6">
-  Login to Your Account
-</h2>
-<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-  <div className="relative">
-    <label className="block text-gray-600 mb-2" htmlFor="email">
-      Email
-    </label>
-    <input
-      id="email"
-      type="email"
-      placeholder="Enter Email"
-      className="w-full p-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
-      {...register("email")}
-    />
-    <FaEnvelope className="absolute right-3 top-12 transform -translate-y-1/2 text-gray-400" />
-    {errors.email?.message && (
-      <p className="text-red-500 text-sm mt-1">
-        {String(errors.email.message)}
-      </p>
-    )}
-  </div>
-
-  <div className="relative">
-    <label className="block text-gray-600 mb-2" htmlFor="password">
-      Password
-    </label>
-    <input
-      id="password"
-      type="password"
-      placeholder="Enter Password"
-      className="w-full p-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
-      {...register("password")}
-    />
-    <FaLock className="absolute right-3 top-12 transform -translate-y-1/2 text-gray-400" />
-    {errors.password?.message && (
-      <p className="text-red-500 text-sm mt-1">
-        {String(errors.password.message)}
-      </p>
-    )}
-  </div>
-
-  <button
-    type="submit"
-    disabled={isSubmitting || isLoading}
-    className={`w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition ease-in-out ${
-      isSubmitting || isLoading ? "opacity-50 cursor-not-allowed" : ""
-    }`}
-  >
-    {isLoading ? (
-      <span className="flex justify-center items-center">
-        <AiOutlineLoading3Quarters className="animate-spin mr-2" />{" "}
-        Processing...
-      </span>
-    ) : (
-      "Login"
-    )}
-  </button>
-</form>
-</div> */
-}

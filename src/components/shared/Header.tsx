@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import logo from "../../../public/hivehaus.webp";
+import logo from "../../../public/images/hivehaus.webp";
 
 import { Button } from "../ui/button";
 import ProfileAvatar from "../miscellaneous/ProfileAvatar";
@@ -26,7 +26,7 @@ const Header = () => {
         targetNode &&
         !dropDownMenuRef.current.contains(targetNode)
       ) {
-        setDropDownState(false);
+        setDropDownState(false); 
       }
     };
 
