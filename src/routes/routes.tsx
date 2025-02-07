@@ -21,6 +21,7 @@ import CreateRoom from "../pages/admin-pages/CreateRooms";
 import AdminBookingDetails from "../pages/admin-pages/BookingDetail";
 import EditRoom from "../pages/admin-pages/EditRoom";
 import AdminProfile from "../pages/admin-pages/AdminProfile";
+import PaymentSuccessPage from "../pages/payment/Success";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
       {
         path: "/booking-details",
         element: <CheckOut />,
+      },
+      {
+        path: "/success",
+        element: <PaymentSuccessPage />
       },
       {
         path: "/user-dashboard",
@@ -110,8 +115,5 @@ export const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage />,
   },
-  {
-    path: "/success",
-    element: <h1>payment success</h1>,
-  },
+
 ]);
