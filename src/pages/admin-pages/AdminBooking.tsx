@@ -68,6 +68,7 @@ const MyBookings = () => {
 
   return (
     <div className="w-full mb-1">
+          <h1 className="text-2xl">My Bookings</h1>
       <Table className="max-w-screen-xl mx-auto mt-24">
         <TableHeader>
           <TableRow>

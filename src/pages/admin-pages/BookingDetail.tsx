@@ -10,6 +10,7 @@ interface Booking {
   paymentStatus: string;
   totalAmount: number;
   room: {
+    name: string;
     roomNo: number;
     floorNo: number;
     capacity: number;
@@ -52,6 +53,8 @@ const AdminBookingDetails = () => {
     return <RoomLoadingContainer />;
   }
 
+  console.log(booking);
+
   return (
     <section className="min-h-screen bg-gray-50 py-10">
       <div className="max-w-6xl mx-auto bg-white p-8 shadow-lg rounded-lg">
@@ -80,7 +83,7 @@ const AdminBookingDetails = () => {
             <div>
               <h3 className="text-lg font-semibold">Room Details:</h3>
               <p>
-                <strong>Room No:</strong> {booking?.room.roomNo}
+                <strong>Room Name:</strong> {booking?.room.name}
               </p>
               <p>
                 <strong>Room No:</strong> {booking?.room.roomNo}

@@ -41,13 +41,13 @@ export const baseApi = createApi({
                 }
             },
         }),
-        updateRoom: builder.mutation({
-            query: ({ updatedData, token, roomId }) => {
-
+        updateRoomById: builder.mutation({
+            query: ({ formData, token }) => {
+        
                 return {
-                    url: `/rooms/${roomId}`,
-                    method: 'PATCH',
-                    body: updatedData,
+                    url: `/rooms/${formData.get("id")}`,
+                    method: 'PUT',
+                    body: formData,
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -55,7 +55,7 @@ export const baseApi = createApi({
             },
             invalidatesTags: ['Slots']
         }),
-        deleteRoom: builder.mutation({
+        deleteRoomById: builder.mutation({
             query: ({ token, roomId }) => {
                 return {
                     url: `/rooms/${roomId}`,
@@ -74,8 +74,8 @@ export const {
     useGetRoomsQuery,
     useGetSingleRoomQuery,
     useCreateRoomMutation,
-    useUpdateRoomMutation,
-    useDeleteRoomMutation,
+    useUpdateRoomByIdMutation,
+    useDeleteRoomByIdMutation,
     useLazyGetRoomsQuery,
     
 } = baseApi
