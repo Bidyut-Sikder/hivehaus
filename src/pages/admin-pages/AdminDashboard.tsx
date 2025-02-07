@@ -4,24 +4,23 @@ import { motion } from "framer-motion";
 import { BookOpenCheck, User } from "lucide-react";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { persistor } from "../../redux/store";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppDispatch } from "../../redux/hooks";
 import {
   clearRole,
   removeToken,
   removeUserData,
 } from "../../redux/slices/authSlice";
-import { cn } from "../../lib/utils";
+
 import {
   Sidebar,
   SidebarBody,
   SidebarLink,
 } from "../../components/ui/user-sidebar";
-
-// import Chart from "@/components/UserCharts/Chart";
+import ChartBoard from "../../components/ui/Chart";
 
 export default function UserDashboard() {
   const [open, setOpen] = useState(false);
-  const name = useAppSelector((state) => state.auth.name);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -51,15 +50,15 @@ export default function UserDashboard() {
       ),
     },
     {
-        label: "Create Room",
-        href: "/admin-dashboard/add-room",
-        icon: (
-          <BookOpenCheck className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-        ),
-      },
+      label: "Create Room",
+      href: "/admin-dashboard/add-room",
+      icon: (
+        <BookOpenCheck className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+      ),
+    },
     {
       label: "Profile",
-      href: "/user-dashboard/profile",
+      href: "/admin-dashboard/profile",
       icon: (
         <User className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
@@ -76,11 +75,9 @@ export default function UserDashboard() {
 
   return (
     <div
-    //this class makes overflow hidden
-      className={cn(
-        "overflow-hidden rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 w-full flex-1 mt-20 mx-auto border border-neutral-200 dark:border-neutral-700 ",
-        // "h-[92vh]"
-      )}
+      className={
+        "overflow-hidden rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 w-full flex-1 mt-20 mx-auto border border-neutral-200 dark:border-neutral-700 "
+      }
     >
       <Sidebar open={open} setOpen={setOpen}>
         <SidebarBody className="justify-between gap-10 border-r">
@@ -92,33 +89,12 @@ export default function UserDashboard() {
               ))}
             </div>
           </div>
-          <div>
-            <SidebarLink
-              link={{
-                label: `${name}`,
-                href: "/",
-                icon: (
-                  <img
-                    src="https://assets.aceternity.com/manu.png"
-                    className="h-7 w-7 flex-shrink-0 rounded-full"
-                    width={50}
-                    height={50}
-                    alt="Avatar"
-                  />
-                ),
-              }}
-            />
-          </div>
         </SidebarBody>
       </Sidebar>
       <div className="flex-1 p-4">
-        {location.pathname === "/user-dashboard" ? (
+        {location.pathname === "/admin-dashboard" ? (
           <div className="overflow-auto">
-            {/* <Chart /> */}
-            
-            <h1>
-              When ocation.pathname === '/admin-dashboard' then show Chart{" "}
-            </h1>
+            <ChartBoard />
           </div>
         ) : (
           <Outlet />

@@ -20,6 +20,7 @@ import AdminBooking from "../pages/admin-pages/AdminBooking";
 import CreateRoom from "../pages/admin-pages/CreateRooms";
 import AdminBookingDetails from "../pages/admin-pages/BookingDetail";
 import EditRoom from "../pages/admin-pages/EditRoom";
+import AdminProfile from "../pages/admin-pages/AdminProfile";
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
           {
             path: "/admin-dashboard/add-room",
             element: <CreateRoom />,
+          },
+          {
+            path: "/admin-dashboard/profile",
+            element: <AdminProfile />,
           },
           {
             path: "/admin-dashboard/edit-room/:id",

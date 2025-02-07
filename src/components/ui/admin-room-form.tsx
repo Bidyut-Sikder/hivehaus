@@ -25,6 +25,7 @@ const RoomForm = ({ onSave, isLoading, room }: Props) => {
     register,
     handleSubmit,
     watch,
+    setValue,
     reset,
     formState: { errors },
   } = useForm<RoomFormInput>();
@@ -50,7 +51,7 @@ const RoomForm = ({ onSave, isLoading, room }: Props) => {
     });
 
     Array.from(data.imageFiles).forEach((imageFile) => {
-      formData.append(`imageFiles`, imageFile);
+      formData.append(`imageFiles`, imageFile);//imageFiles will be checked in backend
     });
 
     if (data.image) {
@@ -63,7 +64,19 @@ const RoomForm = ({ onSave, isLoading, room }: Props) => {
 
   useEffect(() => {
     reset(room);
-  }, [room]);
+  }, [room,reset]);
+
+  const handleDelete = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    imageUrl: string
+  ) => {
+    event.preventDefault();
+
+    setValue(
+      "image",
+      image.filter((url) => url !== imageUrl)
+    );
+  };
 
   return (
     <div className="max-w-xl mx-auto mt-10">
@@ -189,6 +202,25 @@ const RoomForm = ({ onSave, isLoading, room }: Props) => {
             <p className="mt-2 text-sm text-red-500">
               {errors.imageFiles.message}
             </p>
+          )}
+          {image && (
+            <div className="grid mt-1 grid-cols-6 gap-4">
+              {image.map((imageUrl, index) => (
+                <div key={index} className="relative group">
+                  <img
+                    className="min-h-full object-cover"
+                    src={imageUrl}
+                    alt="images"
+                  />
+                  <button
+                    onClick={(e) => handleDelete(e, imageUrl)}
+                    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 text-white"
+                  >
+                    Delete
+                  </button>
+                </div>
+              ))}
+            </div>
           )}
         </div>
 
