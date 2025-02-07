@@ -4,17 +4,18 @@ import { motion } from "framer-motion";
 import { BookOpenCheck,  User } from "lucide-react";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { persistor } from "../../redux/store";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppDispatch } from "../../redux/hooks";
 import { clearRole, removeToken, removeUserData } from "../../redux/slices/authSlice";
-import { cn } from "../../lib/utils";
+
 import { Sidebar, SidebarBody, SidebarLink } from "../../components/ui/user-sidebar";
+import ChartBoard from "../../components/ui/Chart";
 
 // import Chart from "@/components/UserCharts/Chart";
 
 
 export default  function UserDashboard() {
   const [open, setOpen] = useState(false);
-  const name = useAppSelector((state) => state.auth.name)
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -58,10 +59,7 @@ export default  function UserDashboard() {
 
   return (
     <div
-      className={cn(
-        "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 w-full flex-1 mt-20 mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden",
-        "h-[92vh]"
-      )}
+      className={"rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 w-full flex-1 mt-20 mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden"}
     >
       <Sidebar open={open} setOpen={setOpen}>
         <SidebarBody className="justify-between gap-10 border-r">
@@ -76,7 +74,7 @@ export default  function UserDashboard() {
               ))}
             </div>
           </div>
-          <div>
+          {/* <div>
             <SidebarLink
               link={{
                 label: `${name}`,
@@ -92,14 +90,14 @@ export default  function UserDashboard() {
                 ),
               }}
             />
-          </div>
+          </div> */}
         </SidebarBody>
       </Sidebar> 
       <div className="flex-1 p-4">
         {location.pathname === '/user-dashboard' ? (
           <div className="overflow-auto">
-            {/* <Chart /> */}
-           <h1>When ocation.pathname === '/user-dashboard' then show Chart </h1>
+           <ChartBoard />
+          
           </div>
         ) : (
       

@@ -1,103 +1,97 @@
+
+
+import Chart from "react-apexcharts";
 import { motion } from "framer-motion";
+import { Phone, Mail, MapPin, Shield } from "lucide-react";
 import { useAppSelector } from "../../redux/hooks";
 
-const Profile = () => {
-  const { name, email, address, phone } = useAppSelector((state) => state.auth);
+const AdminProfile = () => {
+  const userData = useAppSelector((state) => state.auth);
+
+  const chartOptions = {
+    chart: {
+      id: "admin-statistics",
+      toolbar: {
+        show: false,
+      },
+    },
+    xaxis: {
+      categories: ["January", "February", "March", "April", "May", "June"],
+    },
+    colors: ["#1E40AF", "#9333EA"],
+  };
+
+  const chartData = [
+    {
+      name: "User Activity",
+      data: [30, 40, 35, 50, 49, 60],
+    },
+  ];
 
   return (
-    <section className="min-h-screen bg-gray-50 py-10">
-      <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-        <motion.div
-          className="relative"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <img
-            src="/images/contactus.jpg"
-            alt="cover-image"
-            loading="lazy"
-            className="h-60 w-full object-cover rounded-lg"
+    <div className="flex  justify-center items-center min-h-screen bg-gray-300">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="bg-white shadow-2xl rounded-2xl m-2 p-8 w-full max-w-lg"
+      >
+        <div className="text-center">
+          <motion.img
+            src={"https://cdn-icons-png.flaticon.com/128/2202/2202112.png"}
+            alt="Admin Avatar"
+            className="w-32 h-32 mx-auto rounded-full shadow-md border-4 border-blue-500"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           />
-          <div className="absolute left-1/2 -translate-x-1/2 -bottom-14 ring-4 ring-white rounded-full overflow-hidden w-28 h-28">
-            <img
-              src="/images/about.jpg"
-              alt="profile-image"
-              className="w-full h-full object-cover"
-            />
+          <h1 className="text-3xl font-bold text-gray-800 mt-4">
+            {userData.name}
+          </h1>
+          <p className="text-gray-600 text-lg mt-2">{userData.role}</p>
+        </div>
+
+        <motion.div
+          className="mt-6 space-y-4"
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <div className="flex items-center gap-3">
+            <Shield className="text-gray-600" />
+            <span className="text-lg font-medium text-gray-700">
+              {userData.role}
+            </span>
+          </div>
+          <div className="flex items-center gap-3">
+            <Phone className="text-gray-600" />
+            <span className="text-lg text-gray-700">{userData.phone}</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <Mail className="text-gray-600" />
+            <span className="text-lg text-gray-700">{userData.email}</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <MapPin className="text-gray-600" />
+            <span className="text-lg text-gray-700">{userData.address}</span>
           </div>
         </motion.div>
 
-        <div className="text-center mt-16">
-          <h1 className="text-3xl font-bold text-gray-800 capitalize">
-            {name}
-          </h1>
-          <p className="text-gray-500 mt-2">Welcome to your profile page!</p>
+        <div className="mt-10">
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">
+            {" "}
+            Activity Chart
+          </h2>
+          <Chart
+            options={chartOptions}
+            series={chartData}
+            type="bar"
+            height={300}
+          />
         </div>
-
-        <div className="mt-8 bg-white p-6 shadow-md rounded-md">
-          <ul className="space-y-4 text-lg">
-            <li className="flex items-center gap-x-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 text-blue-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
-                />
-              </svg>
-              <span>{email}</span>
-            </li>
-            <li className="flex items-center gap-x-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 text-green-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-                />
-              </svg>
-              <span>{address}</span>
-            </li>
-            <li className="flex items-center gap-x-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 text-yellow-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
-                />
-              </svg>
-              <span>{phone}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
+      </motion.div>
+    </div>
   );
 };
 
-export default Profile;
+export default AdminProfile;
