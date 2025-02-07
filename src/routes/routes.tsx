@@ -22,6 +22,7 @@ import AdminBookingDetails from "../pages/admin-pages/BookingDetail";
 import EditRoom from "../pages/admin-pages/EditRoom";
 import AdminProfile from "../pages/admin-pages/AdminProfile";
 import PaymentSuccessPage from "../pages/payment/Success";
+import PaymentFailedPage from "../pages/payment/Failed";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
       {
         path: "/success",
         element: <PaymentSuccessPage />
+      },
+      {
+        path: "/failed",
+        element: <PaymentFailedPage />
       },
       {
         path: "/user-dashboard",
