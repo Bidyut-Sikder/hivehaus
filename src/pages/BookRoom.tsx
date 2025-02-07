@@ -1,9 +1,6 @@
-
 // import ProductCarousel from "@/components/ui/ProductCarousel"
 
-
-import {  useLocation, useNavigate, useParams } from "react-router-dom";
-
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../redux/hooks";
@@ -12,6 +9,7 @@ import { useLazyCheckBookinAvilabilityQuery } from "../redux/api/bookingApi";
 import { Skeleton } from "../components/skeleton/skeleton";
 import ProductCarousel from "../components/product/ProductCarousel";
 import { Button } from "../components/ui/button";
+import RoomLoadingContainer from "../components/loading/RoomLoading";
 
 function formatDateToYYYYMMDD(date: any) {
   const year = date.getFullYear();
@@ -35,7 +33,7 @@ const timeSlots = [
 ];
 
 const BookRoom = () => {
-  const location=useLocation()
+  const location = useLocation();
   const { id } = useParams();
   const role = useAppSelector((state) => state.auth.role);
   const navigate = useNavigate();
@@ -48,11 +46,20 @@ const BookRoom = () => {
   const [startTime, setStartTime] = useState<string | null>("09:00 AM");
   const [endTime, setEndTime] = useState<string | null>("05:00 PM");
 
-  const [triggerCheckBooking, { isError }] =
+  const [triggerCheckBooking, { data, isLoading: checkLoading }] =
     useLazyCheckBookinAvilabilityQuery();
 
   useEffect(() => {
-    triggerCheckBooking({ roomId: id, startTime, endTime, date: selectedDate });
+    (async () => {
+      await triggerCheckBooking({
+        roomId: id,
+        startTime,
+        endTime,
+        date: selectedDate,
+      });
+
+      // console.log(res.data.data);
+    })();
   }, [id, startTime, endTime, selectedDate, triggerCheckBooking]);
 
   const handleBooking = () => {
@@ -86,7 +93,9 @@ const BookRoom = () => {
   const handleEndTimeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setEndTime(event.target.value);
   };
-
+  if (checkLoading) {
+    return <RoomLoadingContainer />;
+  }
   if (isLoading) {
     return (
       <div className="grid lg:grid-cols-2 2xl:grid-cols-3 p-8 gap-6 lg:gap-20 mt-36 max-w-screen-2xl mx-auto bg-gray-50/60">
@@ -111,7 +120,7 @@ const BookRoom = () => {
             {room?.name}
           </h2>
           <p className="mt-4 max-w-3xl tracking-wide text-gray-500">
-           {room?.description}
+            {room?.description}
           </p>
           <p className="text-md text-gray-600 font-semibold mt-4">
             Floor: {room?.floorNo}
@@ -176,15 +185,16 @@ const BookRoom = () => {
             </div>
 
             {/* Display Selected Time Range */}
-            {isError ? (
-              <p className="mt-4 text-lg">Available</p>
+
+            {data?.data ? (
+              <p className="mt-4 text-lg"> Taken</p>
             ) : (
-              <p className="mt-4 text-lg">Taken</p>
+              <p className="mt-4 text-lg">Available</p>
             )}
           </div>
 
           <p className="mt-4 max-w-3xl tracking-wide text-gray-500">
-            {room?.amenities.map((amenity:string, index:number) => (
+            {room?.amenities.map((amenity: string, index: number) => (
               <span key={index} className="inline-block mr-1 capitalize">
                 {amenity},
               </span>
