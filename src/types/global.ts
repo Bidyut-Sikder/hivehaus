@@ -8,6 +8,7 @@ export type TRoom = {
     pricePerSlot: number,
     amenities: string[],
     isDeleted: boolean,
+    description:string
     _id?: string,
     image: string[],
     images?: File[]

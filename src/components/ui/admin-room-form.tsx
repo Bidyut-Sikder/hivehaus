@@ -12,6 +12,7 @@ interface RoomFormInput {
   imageFiles: string[];
   amenities: string[];
   image: string[];
+  description:string
 }
 
 type Props = {
@@ -41,6 +42,7 @@ const RoomForm = ({ onSave, isLoading, room }: Props) => {
     }
 
     formData.append("name", data.name);
+    formData.append("description", data.description);
     formData.append("roomNo", data.roomNo.toString());
     formData.append("capacity", data.capacity.toString());
     formData.append("pricePerSlot", data.pricePerSlot.toString());
@@ -93,7 +95,17 @@ const RoomForm = ({ onSave, isLoading, room }: Props) => {
             <p className="text-red-500 text-sm">{errors.name.message}</p>
           )}
         </div>
-
+        {/* Room Description */}
+        <div>
+          <label className="block text-sm font-medium">Room Description:</label>
+          <input
+            className="w-full p-1 border rounded"
+            {...register("description", { required: "Description  is required" })}
+          />
+          {errors.description && (
+            <p className="text-red-500 text-sm">{errors.description.message}</p>
+          )}
+        </div>
         {/* Room Number */}
         <div>
           <label className="block text-sm font-medium">Room Number:</label>

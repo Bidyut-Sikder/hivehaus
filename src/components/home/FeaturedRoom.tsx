@@ -40,7 +40,7 @@ const FeaturedRoom = () => {
       {featureData &&
         [...featureData]
           .reverse()
-          .slice(0, 6)
+          // .slice(0, 6)
           .map((feature: any, index) => (
             <FeatureCard feature={feature} key={feature._id} index={index} />
           ))}
