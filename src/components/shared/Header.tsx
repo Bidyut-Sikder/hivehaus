@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../../public/images/hivehaus.webp";
+// import logo from "../../../public/images/hivehaus.webp";
 
 import { Button } from "../ui/button";
 import ProfileAvatar from "../miscellaneous/ProfileAvatar";
@@ -56,9 +57,11 @@ const Header = () => {
 
   const getTextColor = () => {
     if (location.pathname === "/") {
-      return isScrolled ? "text-black" : "text-white";
+      return  "text-black" 
+      // return isScrolled ? "text-black" : "text-white";
     } else if (location.pathname === "/aboutUs") {
-      return isScrolled ? "text-black" : "text-white";
+      return "text-black"
+      // return isScrolled ? "text-black" : "text-white";
     } else {
       return "text-black";
     }

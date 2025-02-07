@@ -39,8 +39,8 @@ const FeaturedRoom = () => {
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-9/12 items-center justify-center mx-auto py-20">
       {featureData &&
         [...featureData]
-          .reverse()
-          // .slice(0, 6)
+          .reverse() //the newly created one will be the first one
+          .slice(0, 6) //we will only show 6 items
           .map((feature: any, index) => (
             <FeatureCard feature={feature} key={feature._id} index={index} />
           ))}

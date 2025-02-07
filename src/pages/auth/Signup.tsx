@@ -7,10 +7,11 @@ import {
   FaFacebookF,
   FaTwitter,
   FaUser,
-  FaLock,
   FaEnvelope,
   FaPhone,
   FaMapMarkerAlt,
+  FaEye,
+  FaEyeSlash,
 } from "react-icons/fa";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
@@ -24,7 +25,7 @@ import { setRole, setToken, setUserData } from "../../redux/slices/authSlice";
 function SignupPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [signUpUser] = useSignUpUserMutation();
   const {
@@ -34,7 +35,9 @@ function SignupPage() {
   } = useForm({
     resolver: zodResolver(signupSchema),
   });
-
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     try {
@@ -139,12 +142,19 @@ function SignupPage() {
               </label>
               <input
                 id="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Enter Password"
                 className="w-full pl-2 p-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
                 {...register("password")}
               />
-              <FaLock className="absolute right-3 top-12 transform -translate-y-1/2 text-gray-400" />
+              {/* <FaLock className="absolute right-3 top-12 transform -translate-y-1/2 text-gray-400" /> */}
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute cursor-pointer right-3 top-12 transform -translate-y-1/2 text-gray-400"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
               {errors.password?.message && (
                 <p className="text-red-500 text-sm mt-1">
                   {String(errors.password.message)}

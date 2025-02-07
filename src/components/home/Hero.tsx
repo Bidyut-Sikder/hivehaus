@@ -1,34 +1,88 @@
-import { Link } from "react-router-dom";
-import { Button } from "../ui/button";
-// import workspaceVideo from '/video/workspace.webm'
+export const Button = ({
+  size = "md",
+  variant = "solid",
+  className = "",
+  children,
+  ...props
+}: {
+  size?: string;
+  variant?: string;
+  className?: string;
+  children: React.ReactNode;
+  [key: string]: any;
+}) => {
+  const baseStyles =
+    "rounded-xl px-4 py-2 font-semibold focus:outline-none mb-2 transition-all";
+  const sizeStyles = size === "lg" ? "text-lg px-6 py-3" : "text-sm px-3 py-2";
+  const variantStyles =
+    variant === "solid"
+      ? "bg-indigo-600 text-white hover:bg-indigo-700"
+      : "border border-indigo-600 text-indigo-600 hover:bg-indigo-50";
 
-const Hero = () => {
   return (
-    <div className="w-full">
-      {/* <video className="w-full h-[90vh] lg:h-[85vh] relative object-cover" autoPlay loop muted>
-                <source src={workspaceVideo} type="video/mp4" />
-            </video> */}
-      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:54px_54px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
-      <div className="absolute inset-0 bg-gradient-to-tr h-[90vh] lg:h-[85vh] from-black/60 via-black/40 to-slate-200/25">
-        <div className="flex flex-col items-center justify-center translate-y-64 gap-y-8 2xl:gap-y-10 mx-3 md:mx-10 lg:w-9/12 lg:mx-auto">
-          <h1 className="font-bold text-5xl text-center text-white">
-            Book Your Ideal Meeting Room with <span className="">Ease</span>
+    <button
+      className={`${baseStyles} ${sizeStyles} ${variantStyles} ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
+import { motion } from "framer-motion";
+import { LucideBuilding } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const HeroSection = () => {
+  return (
+    <section className="relative bg-gray-50">
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between px-8 py-16 md:py-24">
+        {/* Text Content */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center md:text-left md:w-1/2"
+        >
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight text-gray-800">
+            Find Your Perfect Office Space at{" "}
+            <span className="text-indigo-600">HiveHaus</span>
           </h1>
-          <p className=" text-[#e6e6e6] text-3xl text-center sm:mx-10 xl:w-10/12 2xl:w-8/12">
-            Efficient, hassle-free room booking for all your meeting needs.
+          <p className="mt-4 text-lg text-gray-600">
+            Modern and affordable office spaces tailored for teams of every
+            size. Elevate your business in a space designed to inspire.
           </p>
-          <Link to="/rooms">
-            <Button
-              variant="outline"
-              className="font-semibold cursor-pointer text-md"
+          <div className="mt-6 space-x-4">
+            <Link
+              to={"/rooms"}
+              className="rounded-xl px-6 py-3 text-lg font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none transition-all"
             >
-              Book Now
+              Get Started
+            </Link>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-indigo-600 text-indigo-600 hover:bg-indigo-50"
+            >
+              Explore Locations
             </Button>
-          </Link>
-        </div>
+          </div>
+        </motion.div>
+
+        {/* Image and Icon */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mt-12 md:mt-0 md:w-1/2 flex justify-center"
+        >
+          <div className="relative max-w-md">
+            <LucideBuilding size={200} className="text-indigo-600" />
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-indigo-100 via-transparent to-transparent opacity-50 rounded-2xl" />
+          </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default Hero;
+export default HeroSection;
