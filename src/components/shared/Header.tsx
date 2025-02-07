@@ -1,19 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import logo from "../../../public/images/hivehaus.webp";
+
 // import logo from "../../../public/images/hivehaus.webp";
 
 import { Button } from "../ui/button";
 import ProfileAvatar from "../miscellaneous/ProfileAvatar";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { clearRole, removeToken, removeUserData } from "../../redux/slices/authSlice";
+import {
+  clearRole,
+  removeToken,
+  removeUserData,
+} from "../../redux/slices/authSlice";
 import { persistor } from "../../redux/store";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [dropDownState, setDropDownState] = useState(false);
   const dropDownMenuRef = useRef<HTMLDivElement>(null);
-  const role = useAppSelector((state) => state.auth.role );
+  const role = useAppSelector((state) => state.auth.role);
 
   const dispatch = useAppDispatch();
   const location = useLocation();
@@ -27,7 +31,7 @@ const Header = () => {
         targetNode &&
         !dropDownMenuRef.current.contains(targetNode)
       ) {
-        setDropDownState(false); 
+        setDropDownState(false);
       }
     };
 
@@ -57,10 +61,10 @@ const Header = () => {
 
   const getTextColor = () => {
     if (location.pathname === "/") {
-      return  "text-black" 
+      return "text-black";
       // return isScrolled ? "text-black" : "text-white";
     } else if (location.pathname === "/aboutUs") {
-      return "text-black"
+      return isScrolled ? "text-black" : "text-white";
       // return isScrolled ? "text-black" : "text-white";
     } else {
       return "text-black";
@@ -86,7 +90,11 @@ const Header = () => {
         to="/"
         className="scale-100 cursor-pointer rounded-2xl px-3 py-2 text-xl font-semibold transition-all duration-200 hover:scale-110"
       >
-        <img src={logo} alt="" className="size-14 text-black" />
+        <img
+          src={"/images/hivehaus.webp"}
+          alt=""
+          className="size-14 text-black"
+        />
       </Link>
       <ul className="hidden  md:flex items-center font-semibold justify-between gap-10 ">
         <li className="group flex cursor-pointer flex-col">

@@ -1,36 +1,7 @@
-export const Button = ({
-  size = "md",
-  variant = "solid",
-  className = "",
-  children,
-  ...props
-}: {
-  size?: string;
-  variant?: string;
-  className?: string;
-  children: React.ReactNode;
-  [key: string]: any;
-}) => {
-  const baseStyles =
-    "rounded-xl px-4 py-2 font-semibold focus:outline-none mb-2 transition-all";
-  const sizeStyles = size === "lg" ? "text-lg px-6 py-3" : "text-sm px-3 py-2";
-  const variantStyles =
-    variant === "solid"
-      ? "bg-indigo-600 text-white hover:bg-indigo-700"
-      : "border border-indigo-600 text-indigo-600 hover:bg-indigo-50";
-
-  return (
-    <button
-      className={`${baseStyles} ${sizeStyles} ${variantStyles} ${className}`}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
 import { motion } from "framer-motion";
 import { LucideBuilding } from "lucide-react";
 import { Link } from "react-router-dom";
+
 
 const HeroSection = () => {
   return (
@@ -86,3 +57,36 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
+
+
+export const Button = ({
+  size = "md",
+  variant = "solid",
+  className = "",
+  children,
+  ...props
+}: {
+  size?: string;
+  variant?: string;
+  className?: string;
+  children: React.ReactNode;
+  [key: string]: any;
+}) => {
+  const baseStyles =
+    "rounded-xl px-4 py-2 font-semibold focus:outline-none mb-2 transition-all";
+  const sizeStyles = size === "lg" ? "text-lg px-6 py-3" : "text-sm px-3 py-2";
+  const variantStyles =
+    variant === "solid"
+      ? "bg-indigo-600 text-white hover:bg-indigo-700"
+      : "border border-indigo-600 text-indigo-600 hover:bg-indigo-50";
+
+  return (
+    <button
+      className={`${baseStyles} ${sizeStyles} ${variantStyles} ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
