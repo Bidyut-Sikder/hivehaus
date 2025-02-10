@@ -25,7 +25,7 @@ const HeroSection = () => {
           <div className="mt-6 space-x-4">
             <Link
               to={"/rooms"}
-              className="rounded-xl px-6 py-3 text-lg font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none transition-all"
+              className="rounded-xl  px-6 py-3 text-lg font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none transition-all"
             >
               Get Started
             </Link>

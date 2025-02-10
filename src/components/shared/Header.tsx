@@ -76,7 +76,7 @@ const Header = () => {
     dispatch(removeToken());
     dispatch(removeUserData());
     persistor.purge();
-
+    localStorage.removeItem('bookingDetail');
     navigate("/");
   };
 

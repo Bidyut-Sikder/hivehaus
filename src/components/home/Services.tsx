@@ -1,11 +1,7 @@
 import { features } from "../../constants/constant";
 import { cn } from "../../lib/utils";
 
-
-
-
 const Services = () => {
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  relative z-10 py-20 max-w-7xl mx-auto">
       {features.map((feature, index) => (
@@ -13,9 +9,9 @@ const Services = () => {
       ))}
     </div>
   );
-}
+};
 
-export default Services
+export default Services;
 
 const Feature = ({
   title,

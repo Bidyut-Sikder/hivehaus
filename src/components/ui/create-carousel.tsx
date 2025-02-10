@@ -2,15 +2,6 @@
 
 
 
-// import { Card, CardContent } from "../components/ui/card"
-
-// import {
-//   Carousel,
-//   CarouselContent,
-//   CarouselItem,
-//   CarouselNext,
-//   CarouselPrevious,
-// } from "@/components/ui/carousel";
 import { Card, CardContent } from "./card-component";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./carousel";
 

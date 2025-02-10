@@ -5,7 +5,7 @@ import InfoTab from "../components/home/InfoTab";
 import Services from "../components/home/Services";
 import Testimonial from "../components/home/Testimonials";
 import HeroSection from "../components/home/Hero";
-// import CarouselSection from "../components/home/CarouselSection";
+import CarouselSection from "../components/home/CarouselSection";
 
 function Home() {
   return (
@@ -13,6 +13,9 @@ function Home() {
       <HeroSection />
       <FeaturedRoom />
       <Services />
+      <div className="container mx-auto">
+      <CarouselSection />
+      </div>
       {/* <CarouselSection /> */}
       {/* <HowItWorks /> */}
       <InfoTab />
