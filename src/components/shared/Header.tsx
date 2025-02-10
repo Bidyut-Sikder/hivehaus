@@ -94,7 +94,8 @@ const Header = () => {
         <img
           src={"/images/hivehaus.webp"}
           alt=""
-          className="size-14 text-black"
+          // className="size-14 text-black"
+          className=" md:size-14 size-10 text-black"
         />
       </Link>
       <ul className="hidden  md:flex items-center font-semibold justify-between gap-10 ">
@@ -129,14 +130,18 @@ const Header = () => {
           </>
         )} */}
         {/* {role && <ProfileAvatar />} */}
-        {role ? <ProfileAvatar />:          <>
+        {role ? (
+          <ProfileAvatar />
+        ) : (
+          <>
             <Button>
               <Link to="/login">Login</Link>
             </Button>
             <Button variant="secondary">
               <Link to="/signup">Register</Link>
             </Button>
-          </>}
+          </>
+        )}
         <div
           ref={dropDownMenuRef}
           onClick={() => setDropDownState(!dropDownState)}
