@@ -3,7 +3,7 @@ import CarouselComponent from "../ui/create-carousel";
 
 const CarouselSection = () => {
   return (
-    <section>
+    <section className="container mx-auto">
     <h2 className="text-2xl sm:text-3xl font-semibold mb-4">Our Workstations</h2>
     <CarouselComponent data={visitedAreas} />
   </section>

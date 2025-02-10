@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { LucideBuilding } from "lucide-react";
 import { Link } from "react-router-dom";
 
-
 const HeroSection = () => {
   return (
     <section className="relative bg-gray-50">
@@ -22,7 +21,7 @@ const HeroSection = () => {
             Modern and affordable office spaces tailored for teams of every
             size. Elevate your business in a space designed to inspire.
           </p>
-          <div className="mt-6 space-x-4">
+          {/* <div className="mt-6 space-x-4">
             <Link
               to={"/rooms"}
               className="rounded-xl  px-6 py-3 text-lg font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none transition-all"
@@ -33,6 +32,22 @@ const HeroSection = () => {
               size="lg"
               variant="outline"
               className="border-indigo-600 text-indigo-600 hover:bg-indigo-50"
+           
+           >
+              Explore Locations
+            </Button>
+          </div> */}
+          <div className="mt-6 flex flex-col sm:flex-row sm:space-x-4 items-center">
+            <Link
+              to={"/rooms"}
+              className="w-full sm:w-auto mb-2 sm:mb-0 rounded-xl px-4 py-2 text-sm sm:text-lg font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none transition-all text-center"
+            >
+              Get Started
+            </Link>
+            <Button
+              size="lg"
+              variant="outline"
+              className="w-full sm:w-auto border-indigo-600 text-indigo-600 hover:bg-indigo-50"
             >
               Explore Locations
             </Button>
@@ -57,8 +72,6 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
-
 
 export const Button = ({
   size = "md",

@@ -52,7 +52,8 @@ const RoomCard = ({ room }: RoomCardProps) => {
               disabled
               className="rounded-lg bg-slate-700 px-4 py-2 text-[12px] font-semibold text-white sm:text-sm"
             >
-              Add to Cart
+              {/* Add to Cart */}
+              Add
             </button>
           </>
         ) : (
@@ -61,7 +62,8 @@ const RoomCard = ({ room }: RoomCardProps) => {
               to={`/rooms/${room._id}`}
               className="rounded-lg bg-slate-800 px-4 py-2 text-[12px] font-semibold text-white hover:bg-slate-900 sm:text-sm"
             >
-              Add to Cart
+              {/* Add to Cart */}
+              Create Booking
             </Link>
           </>
         )}

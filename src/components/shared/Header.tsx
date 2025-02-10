@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // import logo from "../../../public/images/hivehaus.webp";
 
 import { Button } from "../ui/button";
 import ProfileAvatar from "../miscellaneous/ProfileAvatar";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import {
-  clearRole,
-  removeToken,
-  removeUserData,
-} from "../../redux/slices/authSlice";
-import { persistor } from "../../redux/store";
+import { useAppSelector } from "../../redux/hooks";
+// import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+// import {
+//   clearRole,
+//   removeToken,
+//   removeUserData,
+// } from "../../redux/slices/authSlice";
+// import { persistor } from "../../redux/store";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,9 +20,9 @@ const Header = () => {
   const dropDownMenuRef = useRef<HTMLDivElement>(null);
   const role = useAppSelector((state) => state.auth.role);
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const closeDropDown = (e: MouseEvent) => {
@@ -63,7 +64,7 @@ const Header = () => {
     if (location.pathname === "/") {
       return "text-black";
       // return isScrolled ? "text-black" : "text-white";
-    } else if (location.pathname === "/aboutUs") {
+    } else if (location.pathname === "/aboutus") {
       return isScrolled ? "text-black" : "text-white";
       // return isScrolled ? "text-black" : "text-white";
     } else {
@@ -71,14 +72,14 @@ const Header = () => {
     }
   };
 
-  const handleLogout = () => {
-    dispatch(clearRole());
-    dispatch(removeToken());
-    dispatch(removeUserData());
-    persistor.purge();
-    localStorage.removeItem('bookingDetail');
-    navigate("/");
-  };
+  // const handleLogout = () => {
+  //   dispatch(clearRole());
+  //   dispatch(removeToken());
+  //   dispatch(removeUserData());
+  //   persistor.purge();
+  //   localStorage.removeItem('bookingDetail');
+  //   navigate("/");
+  // };
 
   return (
     <nav
@@ -106,7 +107,7 @@ const Header = () => {
           <span className="mt-[2px] h-[3px]  w-[0px] rounded-full bg-slate-700 transition-all duration-300 group-hover:w-full"></span>
         </li>
         <li className="group flex  cursor-pointer flex-col">
-          <Link to="aboutUs">About</Link>
+          <Link to="aboutus">About</Link>
           <span className="mt-[2px] h-[3px]  w-[0px] rounded-full bg-slate-700 transition-all duration-300 group-hover:w-full"></span>
         </li>
         <li className="group flex  cursor-pointer flex-col">
@@ -115,7 +116,7 @@ const Header = () => {
         </li>
       </ul>
       <div className="flex items-center gap-2">
-        {role ? (
+        {/* {role ? (
           <Button onClick={handleLogout}>Log Out</Button>
         ) : (
           <>
@@ -126,8 +127,16 @@ const Header = () => {
               <Link to="/signup">Register</Link>
             </Button>
           </>
-        )}
-        {role && <ProfileAvatar />}
+        )} */}
+        {/* {role && <ProfileAvatar />} */}
+        {role ? <ProfileAvatar />:          <>
+            <Button>
+              <Link to="/login">Login</Link>
+            </Button>
+            <Button variant="secondary">
+              <Link to="/signup">Register</Link>
+            </Button>
+          </>}
         <div
           ref={dropDownMenuRef}
           onClick={() => setDropDownState(!dropDownState)}

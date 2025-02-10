@@ -177,7 +177,7 @@ const Footer = () => {
 
                 <li>
                   <Link
-                    to="/aboutUs"
+                    to="/aboutus"
                     className="text-gray-700 transition hover:opacity-75"
                   >
                     About{" "}
@@ -323,7 +323,7 @@ const Footer = () => {
             </ul>
 
             <p className="mt-8 text-xs text-gray-500 sm:mt-0">
-              &copy; 2022. Company Name. All rights reserved.
+              &copy; 2025. HiveHaus. All rights reserved.
             </p>
           </div>
         </div>

@@ -6,41 +6,34 @@ import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import LeftArrow from "../../svgs/LeftArrow";
 import RightARrow from "../../svgs/RightArrow";
-import DotShape from "../../svgs/DotShape";
 
 const testimonials = [
   {
     image:
-      "https://images.unsplash.com/photo-1639149888905-fb39731f2e6c?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    reviewImg:
-      "https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/lineicon.svg",
-    reviewAlt: "lineicon",
+      "https://images.unsplash.com/photo-1530268729831-4b0b9e170218?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+
     details:
-      "Working with this team has transformed our approach to marketing. Their innovative strategies helped us reach new heights in engagement and sales.",
-    name: "Emma Johnson",
-    position: "Marketing Manager",
+      "HiveHaus provided us with a beautiful, fully equipped office space that elevated our team's productivity. The seamless booking process and fantastic amenities were beyond expectations.",
+    name: "Sophia Patel",
+    position: "Operations Manager, TechNest Solutions",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1630026317249-c1c83b21ea07?q=80&w=1970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    reviewImg:
-      "https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/lineicon.svg",
-    reviewAlt: "lineicon",
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+
     details:
-      "The user experience design provided by this team is outstanding. They've made our application more intuitive and visually appealing.",
-    name: "James Smith",
-    position: "Product Designer",
+      "Renting an office house through HiveHaus was one of the best decisions for our growing startup. The environment is conducive to creativity and collaboration, and we felt right at home.",
+    name: "Aiden Walker",
+    position: "Co-Founder, InnovateHub",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1695927621677-ec96e048dce2?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    reviewImg:
-      "https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/lineicon.svg",
-    reviewAlt: "lineicon",
+      "https://images.unsplash.com/photo-1589386417686-0d34b5903d23?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+
     details:
-      "Their development team is top-notch. They delivered our project on time and exceeded our expectations with their coding expertise.",
-    name: "Brown Ledger",
-    position: "Lead Developer",
+      "Our team needed a flexible and comfortable space to work on a critical project. HiveHaus delivered with premium office space and top-notch facilities.",
+    name: "Liam Harris",
+    position: "Project Manager, BrightPath Ventures",
   },
 ];
 
@@ -65,8 +58,6 @@ const Testimonial = () => {
             <SwiperSlide key={index}>
               <SingleTestimonial
                 image={testimonial.image}
-                reviewImg={testimonial.reviewImg}
-                reviewAlt={testimonial.reviewAlt}
                 details={testimonial.details}
                 name={testimonial.name}
                 position={testimonial.position}
@@ -104,8 +95,7 @@ interface Review {
 
 const SingleTestimonial = ({
   image,
-  reviewImg,
-  reviewAlt,
+
   details,
   name,
   position,
@@ -121,31 +111,9 @@ const SingleTestimonial = ({
               alt="image"
               className="w-full h-96 object-cover"
             />
-            <span className="absolute -left-6 -top-6 z-[-1] hidden sm:block">
-              <DotShape />
-            </span>
-            <span className="absolute -bottom-6 -right-6 z-[-1]">
-              <svg
-                width="64"
-                height="64"
-                viewBox="0 0 64 64"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3 32C3 15.9837 15.9837 3 32 3C48.0163 2.99999 61 15.9837 61 32C61 48.0163 48.0163 61 32 61C15.9837 61 3 48.0163 3 32Z"
-                  stroke="#13C296"
-                  strokeWidth="6"
-                />
-              </svg>
-            </span>
           </div>
           <div className="w-full">
             <div>
-              <div className="mb-7">
-                <img src={reviewImg} alt={reviewAlt} />
-              </div>
-
               <p className="mb-11 text-base font-normal italic leading-[1.81] text-body-color dark:text-dark-6 sm:text-[22px]">
                 {details}
               </p>

@@ -13,10 +13,9 @@ function Home() {
       <HeroSection />
       <FeaturedRoom />
       <Services />
-      <div className="container mx-auto">
+
       <CarouselSection />
-      </div>
-      {/* <CarouselSection /> */}
+
       {/* <HowItWorks /> */}
       <InfoTab />
 
