@@ -13,6 +13,7 @@ import RoomLoadingContainer from "../../components/loading/RoomLoading";
 import DataPagination from "../../components/shared/DataPagination";
 import { useLazyGetBookingQuery } from "../../redux/api/bookingApi";
 import { useAppSelector } from "../../redux/hooks";
+import { convertTo12HourFormat } from "../../lib/utils";
 
 interface Booking {
   _id: string;
@@ -58,6 +59,8 @@ const MyBookings = () => {
   const endIndex = startIndex + itemsPerPage;
   const currentData = data?.slice(startIndex, endIndex);
 
+  console.log(data);
+
   const handlePageChange = (page: SetStateAction<number>) => {
     setCurrentPage(page);
   };
@@ -93,8 +96,13 @@ const MyBookings = () => {
               <TableCell>{booking?.date}</TableCell>
               <TableCell>
                 <div className="flex gap-2">
-                  <span>{booking?.slot?.startTime}</span>-
-                  <span>{booking?.slot?.endTime}</span>
+                  <span>
+                    {convertTo12HourFormat(parseInt(booking?.slot?.startTime))}
+                  </span>
+                  -
+                  <span>
+                    {convertTo12HourFormat(parseInt(booking?.slot?.endTime))}
+                  </span>
                 </div>
               </TableCell>
               <TableCell className="capitalize text-green-600">

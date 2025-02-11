@@ -32,3 +32,18 @@ export function getTimeDifference(startTime:string, endTime:string) {
 
 // Example usage
 // console.log(getTimeDifference("09:00 AM", "05:00 PM")); // Output: 8
+export function convertTo12HourFormat(hours:number, minutes:any = 0) {
+  // Determine AM or PM
+  const period = hours >= 12 ? 'PM' : 'AM';
+
+  // Convert hours to 12-hour format
+  hours = hours % 12 || 12;
+
+  // Pad minutes with leading zero if needed
+  minutes = String(minutes).padStart(2, '0');
+
+  return `${hours}:${minutes} ${period}`;
+}
+
+// Example usage
+// console.log(convertTo12HourFormat(17)); 

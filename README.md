@@ -35,7 +35,7 @@ HiveHaus is a modern and elegant platform designed for renting premium office sp
 ## Setup Instructions
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/hivehaus.git
+   git clone https://github.com/Bidyut-Sikder/hivehaus.git
    cd hivehaus
    ```
 2. Install dependencies:

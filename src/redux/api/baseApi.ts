@@ -4,7 +4,7 @@ import { TRoomsResponse, TSingleRoomResponse } from "../../types/global";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   // baseQuery: fetchBaseQuery({ baseUrl: "http://127.0.0.1:5000/api/" }),
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_API_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_API_URL ||'http://127.0.0.1:5000/api/'}),
   tagTypes: ["Slots", "Bookings"],
   endpoints: (builder) => ({
     getRooms: builder.query({
