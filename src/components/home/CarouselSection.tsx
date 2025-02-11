@@ -4,16 +4,16 @@ const CarouselSection = () => {
   return (
     <section className="container mx-auto">
       <h2 className="text-2xl sm:text-3xl font-semibold mb-4">
-        Our Featured Rooms
+        Most Used Rooms
       </h2>
-      <CarouselComponent data={FeaturedRooms} />
+      <CarouselComponent data={MostUsed} />
     </section>
   );
 };
 
 export default CarouselSection;
 
-const FeaturedRooms = [
+const MostUsed = [
   {
     name: "Sunlit Executive Suite",
     description:

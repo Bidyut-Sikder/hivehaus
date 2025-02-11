@@ -12,12 +12,13 @@ function Home() {
     <Fragment>
       <HeroSection />
       <FeaturedRoom />
-      <Services />
+
+        <Services />
+  
 
       <CarouselSection />
 
       {/* <HowItWorks /> */}
-    
 
       <Testimonial />
       <InfoTab />
