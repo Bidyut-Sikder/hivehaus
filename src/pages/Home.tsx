@@ -17,9 +17,10 @@ function Home() {
       <CarouselSection />
 
       {/* <HowItWorks /> */}
-      <InfoTab />
+    
 
       <Testimonial />
+      <InfoTab />
     </Fragment>
   );
 }
