@@ -12,7 +12,7 @@ interface RoomFormInput {
   imageFiles: string[];
   amenities: string[];
   image: string[];
-  description:string
+  description: string;
 }
 
 type Props = {
@@ -53,7 +53,7 @@ const RoomForm = ({ onSave, isLoading, room }: Props) => {
     });
 
     Array.from(data.imageFiles).forEach((imageFile) => {
-      formData.append(`imageFiles`, imageFile);//imageFiles will be checked in backend
+      formData.append(`imageFiles`, imageFile); //imageFiles will be checked in backend
     });
 
     if (data.image) {
@@ -66,7 +66,7 @@ const RoomForm = ({ onSave, isLoading, room }: Props) => {
 
   useEffect(() => {
     reset(room);
-  }, [room,reset]);
+  }, [room, reset]);
 
   const handleDelete = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -96,7 +96,8 @@ const RoomForm = ({ onSave, isLoading, room }: Props) => {
           )}
         </div>
         {/* Room Description */}
-        <div>
+
+        {/* <div>
           <label className="block text-sm font-medium">Room Description:</label>
           <input
             className="w-full p-1 border rounded"
@@ -105,7 +106,28 @@ const RoomForm = ({ onSave, isLoading, room }: Props) => {
           {errors.description && (
             <p className="text-red-500 text-sm">{errors.description.message}</p>
           )}
+        </div> */}
+
+        {/* Room Description */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Room Description:
+          </label>
+          <textarea
+            className="w-full p-2 border rounded-lg text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows={4} // You can adjust the number of rows based on your preference
+            {...register("description", {
+              required: "Description is required",
+            })}
+            placeholder="Enter a detailed description of the room"
+          />
+          {errors.description && (
+            <p className="text-red-500 text-sm mt-1">
+              {errors.description.message}
+            </p>
+          )}
         </div>
+
         {/* Room Number */}
         <div>
           <label className="block text-sm font-medium">Room Number:</label>
