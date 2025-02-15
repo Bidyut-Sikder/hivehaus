@@ -3,6 +3,7 @@ import { useLazyGetAdminBookingByBookingIdQuery } from "../../redux/api/bookingA
 import { useAppSelector } from "../../redux/hooks";
 import RoomLoadingContainer from "../../components/loading/RoomLoading";
 import { useParams } from "react-router-dom";
+import { convertTo12HourFormat } from "../../lib/utils";
 
 interface Booking {
   date: string;
@@ -52,8 +53,6 @@ const AdminBookingDetails = () => {
   if (isLoading) {
     return <RoomLoadingContainer />;
   }
-
-  console.log(booking);
 
   return (
     <section className="min-h-screen bg-gray-50 py-10">
@@ -109,10 +108,17 @@ const AdminBookingDetails = () => {
               <strong>Date:</strong> {booking?.slot.date}
             </p>
             <p>
-              <strong>Start Time:</strong> {booking?.slot.startTime}
+              <strong>Start Time:</strong>{" "}
+              {booking && (
+                <>{convertTo12HourFormat(parseInt(booking?.slot.startTime))}</>
+              )}
+              {/* {booking?.slot.startTime} */}
             </p>
             <p>
-              <strong>End Time:</strong> {booking?.slot.endTime}
+              <strong>End Time:</strong>{" "}
+              {booking && (
+                <>{convertTo12HourFormat(parseInt(booking?.slot.endTime))}</>
+              )}
             </p>
             <p>
               <strong>Is Booked:</strong>{" "}

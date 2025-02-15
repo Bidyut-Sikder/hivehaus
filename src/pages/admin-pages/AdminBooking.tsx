@@ -19,6 +19,7 @@ import {
 } from "../../redux/api/bookingApi";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { convertTo12HourFormat } from "../../lib/utils";
 
 interface Booking {
   _id: string;
@@ -131,8 +132,10 @@ const MyBookings = () => {
               <TableCell>{booking?.date}</TableCell>
               <TableCell>
                 <div className="flex gap-2">
-                  <span>{booking?.slot?.startTime}</span>-
-                  <span>{booking?.slot?.endTime}</span>
+                  {convertTo12HourFormat(parseInt(booking?.slot?.startTime))}
+                  -
+                  {convertTo12HourFormat(parseInt(booking?.slot?.endTime))}
+            
                 </div>
               </TableCell>
               <TableCell className="capitalize text-green-600">
