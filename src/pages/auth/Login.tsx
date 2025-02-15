@@ -92,6 +92,8 @@ function LoginPage() {
         </div>
 
         <div className="space-y-2">
+          <h3>Email: user@gmail.com</h3>
+          <h3>Password: 123456</h3>
           <label
             className="font-medium text-gray-800 text-sm block mb-2"
             htmlFor="email"
