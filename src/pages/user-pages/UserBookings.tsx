@@ -108,7 +108,7 @@ const MyBookings = () => {
               <TableCell className="capitalize text-green-600">
                 {booking?.paymentStatus}
               </TableCell>
-              <TableCell className="text-right capitalize text-red-500">
+              <TableCell className="text-right capitalize text-green-500">
                 {booking?.isConfirmed}
               </TableCell>
             </TableRow>

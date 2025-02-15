@@ -51,9 +51,20 @@ const bookingApi = baseApi.injectEndpoints({
       },
     }),
     getAdminBookingByBookingId: builder.query({
-      query: ({ token,id }) => {
+      query: ({ token, id }) => {
         return {
           url: `/bookings/admin-paid-booking/${id}`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
+    adminBookingDeleteById: builder.mutation({
+      query: ({ token, id }) => {
+        return {
+          url: `/bookings/${id}`,
+          method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -66,7 +77,8 @@ const bookingApi = baseApi.injectEndpoints({
 export const {
   useLazyCheckBookinAvilabilityQuery,
   useConfirmBookingMutation,
+  useAdminBookingDeleteByIdMutation,
   useLazyGetBookingQuery,
   useLazyGetAdminBookingQuery,
-  useLazyGetAdminBookingByBookingIdQuery
+  useLazyGetAdminBookingByBookingIdQuery,
 } = bookingApi;

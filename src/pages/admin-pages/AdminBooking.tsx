@@ -13,8 +13,12 @@ import RoomLoadingContainer from "../../components/loading/RoomLoading";
 import DataPagination from "../../components/shared/DataPagination";
 
 import { useAppSelector } from "../../redux/hooks";
-import { useLazyGetAdminBookingQuery } from "../../redux/api/bookingApi";
+import {
+  useAdminBookingDeleteByIdMutation,
+  useLazyGetAdminBookingQuery,
+} from "../../redux/api/bookingApi";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 interface Booking {
   _id: string;
@@ -38,11 +42,14 @@ interface Booking {
 const MyBookings = () => {
   const token = useAppSelector((state) => state.auth.token);
   const [data, setData] = useState<Booking[]>([]);
-  const [triggerAdminQuery, { isLoading }] = useLazyGetAdminBookingQuery();
+  const [getAdminBookings, { isLoading }] = useLazyGetAdminBookingQuery();
+
+  const [deleteBooking, { isLoading: deleteLoading }] =
+    useAdminBookingDeleteByIdMutation();
 
   useEffect(() => {
     (async () => {
-      const res = await triggerAdminQuery({ token });
+      const res = await getAdminBookings({ token });
       // console.log()
       if (res.data.success) {
         setData(res.data.data);
@@ -65,10 +72,68 @@ const MyBookings = () => {
   if (isLoading) {
     return <RoomLoadingContainer />;
   }
+  // const handleDelete = async (id: string) => {
+  //   const result = await Swal.fire({
+  //     title: "Do you want to delete?",
+  //     showCancelButton: true,
+  //     confirmButtonText: "Delete",
+  //     confirmButtonColor: "#d33",
+  //   });
+
+  //   if (result.isConfirmed) {
+  //     try {
+  //       const res = await deleteBooking({ token, id: id });
+        
+  
+  //       if (res.data.success) {
+  //         await Swal.fire("Success!", "", "success");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error deleting:", error);
+  //       Swal.fire("Error!", "Failed to delete the item.", "error");
+  //     }
+  //   }
+  // };
+
+  const handleDelete = async (id: string) => {
+    const result = await Swal.fire({
+      title: "Do you want to delete?",
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+      confirmButtonColor: "#d33",
+    });
+  
+    if (result.isConfirmed) {
+      try {
+        const res = await deleteBooking({ token, id });
+  
+        if (res.data.success) {
+          await Swal.fire("Success!", "", "success");
+  
+          // **Refetch data after successful deletion**
+          const updatedRes = await getAdminBookings({ token });
+  
+          if (updatedRes.data.success) {
+            setData(updatedRes.data.data);
+          }
+        }
+      } catch (error) {
+        console.error("Error deleting:", error);
+        Swal.fire("Error!", "Failed to delete the item.", "error");
+      }
+    }
+  };
+
+
+
+
+
+
+
 
   return (
     <div className="w-full mb-1">
-          <h1 className="text-2xl">My Bookings</h1>
+      <h1 className="text-2xl">All Bookings</h1>
       <Table className="max-w-screen-xl mx-auto mt-24">
         <TableHeader>
           <TableRow>
@@ -79,6 +144,7 @@ const MyBookings = () => {
             <TableHead>Payment Status</TableHead>
             <TableHead className="w-[100px]">Status</TableHead>
             <TableHead className="w-[100px]">Details</TableHead>
+            <TableHead className="w-[100px]">Delete</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -112,6 +178,14 @@ const MyBookings = () => {
                     Details
                   </span>
                 </Link>
+              </TableCell>
+              <TableCell className="text-right capitalize text-gray-500">
+                <button onClick={() => handleDelete(booking?._id)}>
+                  {" "}
+                  <span className="p-2 bg-red-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                    {deleteLoading ? "Deleting.." : "Delete"}
+                  </span>
+                </button>
               </TableCell>
             </TableRow>
           ))}
