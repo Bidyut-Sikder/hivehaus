@@ -4,7 +4,11 @@ import { Fragment } from "react";
 import ScrollToTop from "./components/home/ScrollToTop";
 import Footer from "./components/shared/Footer";
 
+
 function App() {
+
+
+
   return (
     <Fragment>
       <Header />

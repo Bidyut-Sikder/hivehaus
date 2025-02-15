@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { BookOpenCheck, User } from "lucide-react";
+import { BookOpenCheck, User, DoorOpen, Edit } from "lucide-react";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { persistor } from "../../redux/store";
 import { useAppDispatch } from "../../redux/hooks";
@@ -31,7 +31,9 @@ export default function UserDashboard() {
     dispatch(removeUserData());
     persistor.purge();
 
-    navigate("/");
+    setTimeout(() => {
+      navigate("/");
+    }, 10); // Small delay ensures state updates first
   };
 
   const links = [
@@ -46,14 +48,14 @@ export default function UserDashboard() {
       label: "My Rooms",
       href: "/admin-dashboard/rooms",
       icon: (
-        <BookOpenCheck className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <DoorOpen className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
       label: "Create Room",
       href: "/admin-dashboard/add-room",
       icon: (
-        <BookOpenCheck className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <Edit className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {

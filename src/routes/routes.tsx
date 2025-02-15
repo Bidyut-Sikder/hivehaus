@@ -23,6 +23,8 @@ import EditRoom from "../pages/admin-pages/EditRoom";
 import AdminProfile from "../pages/admin-pages/AdminProfile";
 import PaymentSuccessPage from "../pages/payment/Success";
 import PaymentFailedPage from "../pages/payment/Failed";
+import AdminRoute from "./AdminRoute";
+import UnauthorizedPage from "../pages/Unauthorized";
 
 export const router = createBrowserRouter([
   {
@@ -55,11 +57,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/success",
-        element: <PaymentSuccessPage />
+        element: <PaymentSuccessPage />,
       },
       {
         path: "/failed",
-        element: <PaymentFailedPage />
+        element: <PaymentFailedPage />,
       },
       {
         path: "/user-dashboard",
@@ -71,41 +73,77 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "/user-dashboard/bookings",
-            element: <UserBookings />,
+            element: (
+              <UserRoute>
+                <UserBookings />
+              </UserRoute>
+            ),
           },
           {
             path: "/user-dashboard/profile",
-            element: <UserProfile />,
+            element: (
+              <UserRoute>
+                <UserProfile />
+              </UserRoute>
+            ),
           },
         ],
       },
       {
         path: "/admin-dashboard",
-        element: <AdminDashboard />,
+        element: (
+          <AdminRoute>
+            <AdminDashboard />
+          </AdminRoute>
+        ),
         children: [
           {
             path: "/admin-dashboard/rooms",
-            element: <AdminRooms />,
+            element: (
+              <AdminRoute>
+                <AdminRooms />
+              </AdminRoute>
+            ),
           },
           {
             path: "/admin-dashboard/bookings",
-            element: <AdminBooking />,
+            element: (
+              <AdminRoute>
+                <AdminBooking />
+              </AdminRoute>
+            ),
           },
           {
             path: "/admin-dashboard/bookings/:id",
-            element: <AdminBookingDetails />,
+            element: (
+              <AdminRoute>
+                <AdminBookingDetails />
+              </AdminRoute>
+            ),
           },
           {
             path: "/admin-dashboard/add-room",
-            element: <CreateRoom />,
+            element: (
+              <AdminRoute>
+                <CreateRoom />
+              </AdminRoute>
+            ),
           },
           {
             path: "/admin-dashboard/profile",
-            element: <AdminProfile />,
+            element: (
+              <AdminRoute>
+                <AdminProfile />
+              </AdminRoute>
+            ),
           },
           {
             path: "/admin-dashboard/edit-room/:id",
-            element: <EditRoom />,
+            element: (
+              <AdminRoute>
+                <EditRoom />
+              </AdminRoute>
+            ),
           },
         ],
       },
@@ -120,5 +158,8 @@ export const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage />,
   },
-
+  {
+    path: "/unauthorized",
+    element: <UnauthorizedPage />,
+  },
 ]);
