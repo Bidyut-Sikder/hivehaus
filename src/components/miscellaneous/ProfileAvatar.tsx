@@ -31,7 +31,9 @@ const ProfileAvatar = () => {
     dispatch(removeUserData());
     persistor.purge();
     localStorage.removeItem("bookingDetail");
-    navigate("/");
+    setTimeout(() => {
+      navigate("/");
+    }, 10); // Small delay ensures state updates first
   };
 
   return (
