@@ -44,8 +44,7 @@ const MyBookings = () => {
   const [data, setData] = useState<Booking[]>([]);
   const [getAdminBookings, { isLoading }] = useLazyGetAdminBookingQuery();
 
-  const [deleteBooking, { isLoading: deleteLoading }] =
-    useAdminBookingDeleteByIdMutation();
+  const [deleteBooking] = useAdminBookingDeleteByIdMutation();
 
   useEffect(() => {
     (async () => {
@@ -72,28 +71,6 @@ const MyBookings = () => {
   if (isLoading) {
     return <RoomLoadingContainer />;
   }
-  // const handleDelete = async (id: string) => {
-  //   const result = await Swal.fire({
-  //     title: "Do you want to delete?",
-  //     showCancelButton: true,
-  //     confirmButtonText: "Delete",
-  //     confirmButtonColor: "#d33",
-  //   });
-
-  //   if (result.isConfirmed) {
-  //     try {
-  //       const res = await deleteBooking({ token, id: id });
-        
-  
-  //       if (res.data.success) {
-  //         await Swal.fire("Success!", "", "success");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error deleting:", error);
-  //       Swal.fire("Error!", "Failed to delete the item.", "error");
-  //     }
-  //   }
-  // };
 
   const handleDelete = async (id: string) => {
     const result = await Swal.fire({
@@ -102,17 +79,17 @@ const MyBookings = () => {
       confirmButtonText: "Delete",
       confirmButtonColor: "#d33",
     });
-  
+
     if (result.isConfirmed) {
       try {
         const res = await deleteBooking({ token, id });
-  
+
         if (res.data.success) {
           await Swal.fire("Success!", "", "success");
-  
+
           // **Refetch data after successful deletion**
           const updatedRes = await getAdminBookings({ token });
-  
+
           if (updatedRes.data.success) {
             setData(updatedRes.data.data);
           }
@@ -123,13 +100,6 @@ const MyBookings = () => {
       }
     }
   };
-
-
-
-
-
-
-
 
   return (
     <div className="w-full mb-1">
@@ -182,8 +152,8 @@ const MyBookings = () => {
               <TableCell className="text-right capitalize text-gray-500">
                 <button onClick={() => handleDelete(booking?._id)}>
                   {" "}
-                  <span className="p-2 bg-red-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
-                    {deleteLoading ? "Deleting.." : "Delete"}
+                  <span className="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+                    Delete
                   </span>
                 </button>
               </TableCell>
