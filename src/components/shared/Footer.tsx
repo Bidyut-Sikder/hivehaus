@@ -25,7 +25,7 @@ const Footer = () => {
                   href="#"
                   className="block text-2xl font-medium text-gray-900 hover:opacity-75 sm:text-3xl"
                 >
-                  +88017-3456-7890
+                  +88017-1111-1111
                 </a>
               </p>
 
